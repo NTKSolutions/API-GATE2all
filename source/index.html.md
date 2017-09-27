@@ -202,13 +202,17 @@ Disponibilizamos os seguintes cartões de testes para simular os status das tran
 
 Status | Cartão |
 -------|------- |
-AUTORIZADA | 4556326359707410
+AUTORIZADA | Qualquer número de cartão que respeite [Algoritmo Luhn](https://en.wikipedia.org/wiki/Luhn_algorithm)
 FALHA_NA_COMUNICACAO_COM_FORNECEDOR | 4676674786512068
 PENDENTE_DE_CONFIRMACAO | 4532365531093678
-TRANSACAO_INICIADA | 4490861761911670 
-CRIADA | 4490861761911670
+TRANSACAO_INICIADA | 4490861761911670
 NEGADA | 4035943194824415 
 TIMEOUT | 4539591924980550
+
+<aside class="warning">
+Não utilize números de cartões reais.
+</aside>
+
 
 # Autenticação
 
