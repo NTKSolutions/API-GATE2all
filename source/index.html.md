@@ -27,7 +27,7 @@ Olá! Bem vindo a API REST do **GATE2all.**
 
 Aqui você irá encontrar informações de como integrar seu sistema ao gateway de pagamentos **GATE2all.**
 
-O **GATE2all** é uma plataforma de pagamentos que conecta lojas virtuais, app's mobile, ERP's ou sistema de cobraças com as principais instituições de pagamentos do Brasil.
+O **GATE2all** é uma plataforma de pagamentos que conecta lojas virtuais, app's mobile, ERP's ou sistema de cobranças com as principais instituições de pagamentos do Brasil.
 
 Ao integrar-se ao gateway de pagamentos **GATE2all** seu negócio poderá receber transações através das principais formas de pagamentos como cartão de crédito e débito, boleto bancário e transferência entre contas.
 
