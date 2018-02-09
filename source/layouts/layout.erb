@@ -69,6 +69,7 @@ under the License.
           <% end %>
         </ul>
       <% end %>
+      <div id="google_translate_element"></div>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
@@ -93,4 +94,12 @@ under the License.
       </div>
     </div>
   </body>
+  <script type="text/javascript">
+      function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'pt', includedLanguages: 'de,en,es,fr,it,ja,zh-CN',
+              layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false, multilanguagePage: true}, 'google_translate_element');
+      }
+  </script>
+
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </html>
