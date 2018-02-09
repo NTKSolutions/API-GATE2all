@@ -214,6 +214,8 @@ TIMEOUT | 4539591924980550
 
 ## Número de Documentos de Testes Boleto e Transferência
 
+Esses números de documento devem ser usados no nosso simulador Itaú.
+
 Status | Número Documento |
 -------|------- |
 TRANSACAO_INICIADA | Qualquer número de documento válido
