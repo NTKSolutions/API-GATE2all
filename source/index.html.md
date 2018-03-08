@@ -16,6 +16,7 @@ includes:
   - status_http
   - errors_api
   - status_eci
+  - softdescriptor
   - provider
   - brands
 
@@ -222,7 +223,7 @@ NEGADA | 4035943194824415
 TIMEOUT | 4539591924980550
 
 
-## Número de Documentos de Testes Boleto e Transferência
+## Números de Documentos de Testes Boleto e Transferência
 
 Esses números de documento devem ser usados no nosso simulador Itaú.
 
@@ -415,7 +416,7 @@ System.out.println(response);
 |`card.fixedInstallments`|Booleano|—|Não|**Default: false** - **True** = não permite que o comprador selecione a quantidade de parcelas no formulário de pagamento.|
 |`card.interestType`|Número|1|Não|**Default: 3** - Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
 |`card.authenticate`|Número|1|Não|**Default: 3** - Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
-|`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
+|`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.[SoftDescriptor](#softdescriptor)|
 |`card.saveCard`|Booleano|—|Não|Configura salvar o cartão (tokenização). |
 |`card.recurrent`|Booleano|—|Não|Informa se a transação é recorrente. |
 |`electronicTransfer.provider`|Texto|20|Sim|Nome da instituição responsável pela transferência.|
@@ -469,7 +470,7 @@ Caso a forma de pagamento escolhida pelo usuário for cartão de crédito, apare
 
 <img src="images/intencao02.png" />
 
-Após a conclusão do preenchimento do formulário o GATE2all enviará uma notificação [notificação](#notifica-o) via POST contendo o `transactionId` e o `referenceId` para o sistema do lojista realizar a [consulta](#consulta) da transação notificada.
+Após a conclusão do preenchimento do formulário o GATE2all enviará uma [notificação](#notifica-o) via POST contendo o `transactionId` e o `referenceId` para o sistema do lojista realizar a [consulta](#consulta) da transação notificada.
 
 Caso a forma de pagamento escolhida pelo usuário for boleto, aparecerá a seguinte tela:
 
@@ -505,7 +506,7 @@ A loja virtual deve fazer a captura de todos os dados necessários e submetê-lo
 Para criar uma autorização é necessário enviar um POST para o seguinte recurso:
 
 <aside class="notice">
-Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendamos a consulta pelo número do pedido `referenceId` ou criando uma [intenção](#inteno-de-venda) e informando o mesmo `transactionId` na requisição com os dados do cartão. Desta maneira é possível realizar uma consulta para verificar o status da transação. 
+Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendamos a consulta pelo número do pedido `referenceId` ou criando uma <b>Intenção de Venda</b> e informando o mesmo `transactionId` na requisição com os dados do cartão. Desta maneira é possível realizar uma consulta para verificar o status da transação. 
 </aside>
 ### REQUISIÇÃO
 
@@ -618,7 +619,7 @@ System.out.println(response);
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
 |`customer.document`|Texto|18|Não|Número do CPF/CNPJ do portador do cartão.|
 |`card.type`|Número|1|Não|**Default: 1** - Configura as opcões disponíveis. 1 Configura cartão de crédito. 2|
-|`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
+|`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.[SoftDescriptor](#softdescriptor)|
 |`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
 |`card.installments`|Número|2|Sim|Número de parcelas.|
 |`card.interestType`|Número|1|Não|**Default: 3** - Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
@@ -2161,7 +2162,7 @@ System.out.println(response);
 |`card.installments`|Número|2|Sim|Número de parcelas.|
 |`card.interestType`|Número|1|Não|**Default: 3** - Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
 |`card.authenticate`|Número|1|Não|**Default: 3** - Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
-|`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
+|`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.[SoftDescriptor](#softdescriptor)|
 |`cardInfo.token`|Texto|100|Sim|Token gerado anteriormente pela operação de Tokenização.|
 
 ### RESPOSTA
