@@ -16,6 +16,7 @@ includes:
   - status_http
   - errors_api
   - status_eci
+  - provider
   - brands
 
 search: true
@@ -60,7 +61,7 @@ Este documento é destinado aos desenvolvedores e analistas de sistemas de e-com
 
 ### CONTATOS
 
-Suporte ao desenvolvedor é prestado através do e-mail <a href="mailto:suporte@2all.com.br">suporte@2all.com.br.</a>
+Suporte ao desenvolvedor é prestado através do e-mail <a href="mailto:dev@ntk.com.br">dev@ntk.com.br.</a>
 <aside class="warning">
 Nossa equipe de suporte a desenvolvedores não provê suporte para linguagens de programação e tecnologias utilizadas pelo desenvolvedor.
 </aside>
@@ -118,6 +119,8 @@ Para que o lojista possa utilizar as funcionalidades do **GATE2all**, este deve 
 
 **GetNet**
 
+**Stone**
+
 [Bandeiras suportadas](#bandeiras) 
 
 <aside class="warning">
@@ -133,6 +136,10 @@ Não são todos os bancos emissores da Mastercard Maestro que suportam transaç�
 
 * Emissão de boleto
 * Transferência entre contas
+
+<img src="images/bradesco_sps.png" /> Bradesco
+
+* Emissão de boleto registrado
 
 <img src="images/itau-logo.jpg" /> Itaú Shopline
 
@@ -179,7 +186,7 @@ O gateway de pagamento **GATE2all** permite dois tipos de integração:
 
 ## Ambientes
 
-Para utilizar nosso ambiente de testes envie um e-mail informando os dados abaixo para <a href="mailto:suporte@2all.com.br">suporte@2all.com.br</a> onde realizaremos o cadastro do desenvolvedor ou empresa responsável pelo desenvolvimento. 
+Para utilizar nosso ambiente de testes envie um e-mail informando os dados abaixo para <a href="mailto:dev@ntk.com.br">dev@ntk.com.br</a> onde realizaremos o cadastro do desenvolvedor ou empresa responsável pelo desenvolvimento. 
 
 * `RAZAO SOCIAL`
 * `NOME FANTASIA`
@@ -196,6 +203,9 @@ Para utilizar nosso ambiente de testes envie um e-mail informando os dados abaix
 
 **Requisição de transação**: https://apidemo.gate2all.com.br/
 
+**authenticationApi**: demo
+**authenticationKey**: A420C95AF486F0E64437
+
 ## Cartões de Testes
 
 Disponibilizamos os seguintes cartões de testes para simular os status das transações.
@@ -203,10 +213,10 @@ Disponibilizamos os seguintes cartões de testes para simular os status das tran
 Status | Cartão |
 -------|------- |
 AUTORIZADA | Qualquer número de cartão que respeite <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Algoritmo Luhn</a>
-FALHA_NA_COMUNICACAO_COM_FORNECEDOR | 4676674786512068
-PENDENTE_DE_CONFIRMACAO_TRANSACAO_NAO_PROCESSADA_NO_FORNECEDOR | 4532365531093678
-PENDENTE_DE_CONFIRMACAO_TRANSACAO_PROCESSADA_NO_FORNECEDOR | 5375387267180047
-TRANSACAO_INICIADA | 4490861761911670 
+FALHA NA COMUNICAÇÃO COM FORNECEDOR | 4676674786512068
+PENDENTE DE CONFIRMAÇÃO TRANSAÇÃO_NAO_PROCESSADA NOFORNECEDOR | 4532365531093678
+PENDENTE_DE_CONFIRMAÇÃO TRANSAÇÃO PROCESSADA NO FORNECEDOR | 5375387267180047
+TRANSAÇÃO INICIADA | 4490861761911670 
 CRIADA | 4490861761911670
 NEGADA | 4035943194824415
 TIMEOUT | 4539591924980550
@@ -218,7 +228,7 @@ Esses números de documento devem ser usados no nosso simulador Itaú.
 
 Status | Número Documento |
 -------|------- |
-TRANSACAO_INICIADA | Qualquer número de documento válido
+TRANSAÇÃO INICIADA | Qualquer número de documento válido
 CONFIRMADA (BOLETO PAGO MAIOR +R$10,00) | 34331423786
 CONFIRMADA (BOLETO PAGO MENOR -R$10,00) | 18805556890
 CONFIRMADA (TRANSFERÊNCIA) | 45601654247
@@ -255,11 +265,11 @@ Para realizar uma intenção de venda é necessário enviar um POST para o segui
 ```json
 {
     "referenceId": "19893211234",
-    "amount": "100",
+    "amount": "1000",
     "description": "Mouse sem fio",
     "postBackUrl": "http://url-notificacao",
     "redirectUrl": "http://url-redirect",
-    "dhExpiration": "2018-01-25T18:10:53",
+    "dtExpiration": "2018-03-25T18:10:53",
     "customer": {
         "name": "Comprador Teste",
         "document": "12345678909",
@@ -267,6 +277,7 @@ Para realizar uma intenção de venda é necessário enviar um POST para o segui
         "address": {
             "address": "Endereco",
             "number": "100",
+            "complement": "Apartamento 22",
             "district": "Vila Olimpia",
             "zipcode": "09878675",
             "city": "Sao Paulo",
@@ -281,14 +292,15 @@ Para realizar uma intenção de venda é necessário enviar um POST para o segui
             "fixedInstallments": false,
             "interestType": "3",
             "authenticate": "3",
-            "softDescriptor": "Gate2@all",
-            "saveCard": true
+            "softDescriptor": "GATE2all",
+            "saveCard": true,
+            "recurrent": false
         },
         "electronicTransfer": {
             "provider": "Bradesco"
         },
         "bankSlip": {
-            "expirationDate": "2018-01-30",
+            "expirationDate": "2018-03-30",
             "instructions": "Aceitar somente até a data de vencimento, após essa data juros de 1% dia",
             "guarantor": "Comprador Teste",
             "provider": "Bradesco"
@@ -321,11 +333,11 @@ con.setRequestProperty("authenticationkey", "demo");
 
 String body = "{"
         + "\"referenceId\": \"19893211234\","
-        + "\"amount\": \"100\","
+        + "\"amount\": \"1000\","
         + "\"description\": \"Mouse sem fio\","
         + "\"postBackUrl\": \"http://url-notificacao\","
         + "\"redirectUrl\": \"http://url-redirect\","
-        + "\"dhExpiration\": \"2018-01-25T18:10:53\","
+        + "\"dtExpiration\": \"2018-01-25T18:10:53\","
         + "    \"customer\": {"
         + "       \"name\": \"Comprador Teste\","
         + "       \"document\": \"12345678909\","
@@ -334,6 +346,7 @@ String body = "{"
         + "           \"address\": \"Endereco\","
         + "           \"number\": \"100\","
         + "           \"district\": \"Vila Olimpia\","
+        + "           \"complement\": \"Apartamento 22\","
         + "           \"zipcode\": \"09878675\","
         + "           \"city\": \"Sao Paulo\","
         + "           \"state\": \"SP\""
@@ -347,14 +360,15 @@ String body = "{"
         + "            \"fixedInstallments\": false,"
         + "            \"interestType\": \"4\","
         + "            \"authenticate\": \"3\","
-        + "            \"softDescriptor\": \"Gate2@all\","
-        + "            \"saveCard\": true"
+        + "            \"softDescriptor\": \"GATE2all\","
+        + "            \"saveCard\": true,"
+        + "            \"recurrent\": true"
         + "        },"
         + "        \"electronicTransfer\": {"
         + "            \"provider\": \"Bradesco\""
         + "        },"
         + "        \"bankSlip\": {"
-        + "            \"expirationDate\": \"2018-01-30\","
+        + "            \"expirationDate\": \"2018-03-30\","
         + "            \"instructions\": \"Aceitar somente ate a data de vencimento, apes essa data juros de 1% dia\","
         + "            \"guarantor\": \"Comprador Teste\","
         + "            \"provider\": \"Bradesco\""
@@ -382,31 +396,34 @@ System.out.println(response);
 |`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`amount`|Número|16|Sim|Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
 |`description`|Texto|300|Não|Descrição da transação.|
-|`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
+|`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da trancação para o lojista [notificação](#notifica-o)|
 |`redirectUrl`|Texto|—|Não|URL onde o GATE2all redirecionará o comprador após o processamento da transação.|
-|`dhExpiration`|Texto|20|Não|Data da expiração da intenção. Formato **2017-08-25T18:10:53** |
+|`dtExpiration`|Texto|20|Não|Data da expiração da intenção. Formato **2018-01-25T18:10:53** |
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
 |`customer.document`|Texto|18|Sim|Número do CPF/CNPJ do portador do cartão.|
 |`customer.email`|Texto|100|Sim|Email do portador do cartão.|
 |`address.address`|Texto|60|Sim|Endereço do comprador.|
 |`address.number`|Texto|10|Sim|Número do endereço do comprador.|
+|`address.complement`|Texto|150|Não|Complemento do endereço do comprador.|
 |`address.district`|Texto|80|Sim|Bairro do comprador.|
 |`address.zipcode`|Número|8|Sim|CEP do comprador.|
 |`address.city`|Texto|30|Sim|Cidade do comprador.|
 |`address.state`|Texto|2|Sim|Sigla do estado do comprador.|
-|`card.type`|Inteiro|—|Não|0 Default, configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.|
-|`card.capture`|Booleano|—|Não|**true** = Autoriza e confirma a transação. **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura](#captura)) noutra requisição.|
-|`card.installments`|Número|20|Sim|Número de parcelas.|
-|`card.fixedInstallments`|Booleano|—|Não|**True** = não permite que o comprador selecione a quantidade de parcelas no formulário de pagamento.|
-|`card.interestType`|Número|1|Sim|Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
-|`card.authenticate`|Texto|20|Sim|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
+|`card.type`|Número|1|Não|**Default: 0**, configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.|
+|`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação. **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura](#captura)) noutra requisição.|
+|`card.installments`|Número|2|Sim|Número de parcelas.|
+|`card.fixedInstallments`|Booleano|—|Não|**Default: false** - **True** = não permite que o comprador selecione a quantidade de parcelas no formulário de pagamento.|
+|`card.interestType`|Número|1|Não|**Default: 3** - Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
+|`card.authenticate`|Número|1|Não|**Default: 3** - Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
 |`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
 |`card.saveCard`|Booleano|—|Não|Configura salvar o cartão (tokenização). |
+|`card.recurrent`|Booleano|—|Não|Informa se a transação é recorrente. |
 |`electronicTransfer.provider`|Texto|20|Sim|Nome da instituição responsável pela transferência.|
 |`bankSlip.expirationDate`|Texto|20|Sim|Data de vencimento do boleto. formato **YYYY-MM-DD**|
 |`bankSlip.instructions`|Texto|300|Sim|Instruções do boleto.|
 |`bankSlip.guarantor`|Texto|45|Sim|Nome do avalista.|
 |`bankSlip.provider`|Texto|20|Sim|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
+
 
 ### RESPOSTA SUCESSO
 
@@ -421,11 +438,13 @@ Status : 201
 
 > Falha
 
+Status : 400
+
 
 ```json
 {
   "error": {
-    "message": "amount O campo amount e obrigatorio."
+    "message": "amount nao pode ser vazio"
   }
 }
 ```
@@ -450,7 +469,7 @@ Caso a forma de pagamento escolhida pelo usuário for cartão de crédito, apare
 
 <img src="images/intencao02.png" />
 
-Após a conclusão do preenchimento do formulário o GATE2all enviará uma notificação contendo o `transactionId` e o `referenceId` para o sistema do lojista realizar a [consulta](#consulta) da transação notificada.
+Após a conclusão do preenchimento do formulário o GATE2all enviará uma notificação [notificação](#notifica-o) via POST contendo o `transactionId` e o `referenceId` para o sistema do lojista realizar a [consulta](#consulta) da transação notificada.
 
 Caso a forma de pagamento escolhida pelo usuário for boleto, aparecerá a seguinte tela:
 
@@ -495,7 +514,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 ```json
 {
    "referenceId": "19893211234",
-   "amount": "100",
+   "amount": "1000",
    "description": "Mouse sem fio",
    "customer": {
       "name": "Comprador Teste",
@@ -503,13 +522,16 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
    },
    "payment": {
        "card": {
-          "type": "1",
+          "type": 1,
           "capture": false,
           "installments": 1,
           "interestType": 3,
           "authenticate": 3,
-          "softDescriptor": "Pagamento Gate2all",
+          "softDescriptor": "Pagamento GATE2all",
           "saveCard": false,
+          "recurrent": false,
+          "provider": "Cielo",
+          "providerVersion": "3.0",
           "cardInfo": {
               "number": "4539708473330561",
               "expirationMonth": "04",
@@ -543,7 +565,7 @@ con.setRequestProperty("authenticationkey", "demo");
 
 String body = "{"
         + "\"referenceId\": \"123456\","
-        + "\"amount\": \"100\","
+        + "\"amount\": \"1000\","
         + "\"description\": \"Venda Teste\","
         + "\"postBackUrl\": \"http://url-notificacao\","
         + "\"customer\": {"
@@ -558,12 +580,13 @@ String body = "{"
         + "        \"interestType\": 3,"
         + "        \"authenticate\": 3,"
         + "        \"saveCard\": false,"
+        + "        \"recurrent\": false,"
         + "        \"softDescriptor\": \"Gate2All\","
         + "        \"cardInfo\": {"
-        + "           \"number\": \"4556326359707410\","
+        + "           \"number\": \"4539708473330561\","
         + "           \"expirationMonth\": \"04\","
-        + "           \"expirationYear\": \"2018\","
-        + "           \"cvv\": \"6434\","
+        + "           \"expirationYear\": \"2019\","
+        + "           \"cvv\": \"234\","
         + "           \"brand\": \"VISA\","
         + "           \"holderName\": \"COMPRADOR TESTE\""
         + "        }"
@@ -591,23 +614,25 @@ System.out.println(response);
 |`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`amount`|Número|16|Sim|Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
 |`description`|Texto|300|Não|Descrição da transação.|
-|`postBackUrl`|Texto|—|Não|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
+|`postBackUrl`|Texto|—|Não|URL onde o GATE2all notificará eventuais status da trancação para o lojista [notificação](#notifica-o)|
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
 |`customer.document`|Texto|18|Não|Número do CPF/CNPJ do portador do cartão.|
-|`card.type`|Inteiro|—|Sim|Configura as opcões disponíveis. 1 Configura cartão de crédito. 2|
+|`card.type`|Número|1|Não|**Default: 1** - Configura as opcões disponíveis. 1 Configura cartão de crédito. 2|
 |`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
 |`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
 |`card.installments`|Número|2|Sim|Número de parcelas.|
-|`card.interestType`|Número|1|Sim|Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
-|`card.authenticate`|Número|1|Sim|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
-|`card.provider`|Número|—|Não|Nome do Meio de Pagamento - (OBS: funcionalidade ainda não disponível)|
-|`card.saveCard`|Booleano|—|Não|Configura salvar o cartão (tokenização). |
+|`card.interestType`|Número|1|Não|**Default: 3** - Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
+|`card.authenticate`|Número|1|Não|**Default: 3** - Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
+|`card.provider`|Número|—|Não|Nome do Fornecedor (Adquirente) pela qual a autorização vai ser processada. [Redes Adquirentes](#redes-adquirentes)|
+|`card.providerVersion`|Texto|11|Não|Versão da Integração do Fornecedor| 
+|`card.saveCard`|Booleano|—|Não|**Default: false** - Configura salvar o cartão (tokenização). |
+|`card.recurrent`|Booleano|—|Não|**Default: false** - Informa se a transação é recorrente. |
 |`cardInfo.number`|Texto|19|Sim|Número do cartão.|
 |`cardInfo.expirationMonth`|Número|2|Sim|Mês da validade do cartão.|
-|`cardInfo.expirationYear`|Número|2|Sim|Ano da validade do cartão.|
-|`cardInfo.cvv`|Número|4|Não|Código de segurança do cartão.|
+|`cardInfo.expirationYear`|Número|4|Sim|Ano da validade do cartão. Formato **YYYY**|
+|`cardInfo.cvv`|Número|4|Sim|Código de segurança do cartão.|
 |`cardInfo.brand`|Texto|20|Sim|Bandeira do cartão.[Bandeiras](#bandeiras).|
-|`cardInfo.holderName`|Texto|20|Não|Nome do portador do cartão.|
+|`cardInfo.holderName`|Texto|25|Não|Nome do portador do cartão, só aceita caracteres|
 
 ### RESPOSTA
 
@@ -618,29 +643,30 @@ System.out.println(response);
   "transactionId": "92d50ba4-5d93-4ee5-90e8-9884b250310a",
   "referenceId": "1463697571584",
   "description": "TV LG 42",
-  "amount": "100",
+  "amount": "1000",
   "status": 5,
-  "dtTransaction": "2017-03-05T12:04:20",
+  "dtTransaction": "2018-03-05T12:04:20",
   "payment": {
     "card": {
-      "provider": "CIELO",
-      "authenticationECI": 7,
-      "codAuthorization": "123456",
-      "providerReference": "1006993069000834928A",
-      "providerCode": "00",
-      "providerMessage": "Transação autorizada",
-      "type": "1",
-      "softDescriptor": "EC02",
+      "type": 1,
+      "softDescriptor": "Gate2All",
       "interestType": 3,
-      "integrationType": 1,
       "installments": 1,
       "capture": false,
       "authenticate": 3,
       "saveCard": false,
+      "recurrent": false,
+      "provider": "CIELO",
+      "providerVersion": "3.0",
+      "authenticationECI": 7,
+      "codAuthorization": "123456",
+      "providerReference": "1006993069000834928A",
+      "providerCode": "00",
+      "providerMessage": "Transacao autorizada com sucesso",
       "cardInfo": {
         "number": "453970******0561",
         "expirationMonth": "04",
-        "expirationYear": "2017",
+        "expirationYear": "2019",
         "cvv": "***",
         "brand": "VISA",
         "holderName": "HOLDER NAME"
@@ -676,8 +702,8 @@ System.out.println(response);
 |-----------|----|-------|-----------|---------|
 |`transactionId`|Texto|150|Identificador da transação do GATE2all.|
 |`dtTransaction`|DataHora|19|Data e hora da transação.|
-|`card.provider`|Texto|100|Nome da instituição financeira.|
-|`card.providerReference`|Texto|100|Referência da instituição.|
+|`card.provider`|Texto|10|Nome da instituição financeira.|
+|`card.providerVersion`|Texto|11|Versão da Integração do Fornecedor| 
 |`card.providerMessage`|Texto|100|Mensagem da instituição.|
 |`card.providerCode`|Texto|100|Codigo de resposta da instituição.|
 |`card.codAuthorization`|Texto|100|Codigo de autorização da instituição.|
@@ -704,7 +730,7 @@ Como é o processo de pagamento com boleto bancário:
 ```json
 {
    "referenceId": "19893211234",
-   "amount": "100",
+   "amount": "1000",
    "description": "Produto ou serviço",
    "customer": {
       "name": "Comprador",
@@ -713,6 +739,7 @@ Como é o processo de pagamento com boleto bancário:
       "address" : {
           "address" : "Endereco",
           "number" : "100",
+          "complement": "Apartamento 22",
           "district" : "Vila Olimpia",
           "zipcode" : "09878675",
           "city" : "Sao Paulo",
@@ -721,7 +748,7 @@ Como é o processo de pagamento com boleto bancário:
    },
    "payment": {
        "bankSlip" : {
-            "expirationDate" :"2017-03-01",
+            "expirationDate" :"2018-03-10",
             "instructions" : "Aceitar somente até a data de vencimento, após essa data juros de 1% dia",
             "guarantor" : "Comprador",
             "provider":"Itau"
@@ -753,7 +780,7 @@ con.setRequestProperty("authenticationkey", "demo");
 
 String body = "{"
         + "\"referenceId\": \"123456789\","
-        + "\"amount\": \"100\","
+        + "\"amount\": \"1000\","
         + "\"description\": \"TV LG 42\","
         + "\"postBackUrl\": \"http://url-notificacao\","
         + "\"customer\": {"
@@ -763,6 +790,7 @@ String body = "{"
         + "    \"address\" : {"
         + "        \"address\" : \"Rua Fidencio Ramos\","
         + "        \"number\": \" 100\","
+        + "        \"complement\": \"Apartamento 22\","
         + "        \"district\" : \"Vila Olimpia\","
         + "        \"zipcode\" : \"05890090\","
         + "        \"city\" : \"Sao Paulo\","
@@ -771,7 +799,7 @@ String body = "{"
         + "    },"
         + "    \"payment\": {"
         + "        \"bankSlip\" : {"
-        + "            \"expirationDate\" :\"2017-12-01\","
+        + "            \"expirationDate\" :\"2018-03-10\","
         + "            \"instructions\" : \"Aceitar somente ate a data de vencimento, apos essa data juros de 1% dia\","
         + "            \"guarantor\" : \"Joao da Silva\","
         + "            \"provider\":\"Itau\""
@@ -806,6 +834,7 @@ System.out.println(response);
 |`customer.email`|Texto|100|Sim|Email do portador do cartão.|
 |`address.address`|Texto|60|Sim|Endereço do comprador.|
 |`address.number`|Texto|10|Sim|Número do comprador.|
+|`address.complement`|Texto|150|Não|Complemento do endereço do comprador.|
 |`address.district`|Texto|80|Sim|Bairro do comprador.|
 |`address.zipcode`|Número|8|Sim|CEP do comprador.|
 |`address.city`|Texto|30|Sim|Cidade do comprador.|
@@ -821,9 +850,9 @@ System.out.println(response);
 {
   "transactionId": "7365ca65-70d4-4d7c-ac3d-a20f5730c241",
   "referenceId": "19893211234",
-  "amount": "100",
+  "amount": "1000",
   "description": "Produto ou serviço",
-  "dtTransaction": "2017-03-08T10:46:31-0300",
+  "dtTransaction": "2018-03-08T10:46:31-0300",
   "customer": {
     "name": "Comprador",
     "document": "12345678909",
@@ -831,6 +860,7 @@ System.out.println(response);
     "address": {
       "address": "Endereco",
       "number": "100",
+      "complement": "Apartamento 22",
       "district": "Vila Olimpia",
       "zipcode": "09878675",
       "city": "Sao Paulo",
@@ -842,12 +872,12 @@ System.out.println(response);
       "providerReference": "20575112",
       "providerCode": "00",
       "providerMessage": "Transação iniciada",
-      "emissionDate": "2017-03-08",
-      "expirationDate": "2017-03-10",
+      "emissionDate": "2018-03-08",
+      "expirationDate": "2018-03-10",
       "instructions": "Aceitar somente até a data de vencimento, após essa data juros de 1% dia",
       "guarantor": "Comprador",
       "provider": "ITAU",
-      "paymentDate": "2017-03-10",
+      "paymentDate": "2018-03-08",
       "paymentAmount": "100",
       "url": "https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
     }
@@ -888,7 +918,7 @@ No momento do pagamento, o cliente comprador informa os dados da agência, infor
 ```json
 {
     "referenceId": "19893211234",
-    "amount": "100",
+    "amount": "1000",
     "description": "Produto ou serviço",
     "customer": {
       "name": "Comprador",
@@ -897,6 +927,7 @@ No momento do pagamento, o cliente comprador informa os dados da agência, infor
       "address": {
         "address": "Endereco 100",
         "number" : "100",
+        "complement": "Apartamento 22",
         "district": "Vila Olimpia",
         "zipcode": "05890090",
         "city": "Sao Paulo",
@@ -934,7 +965,7 @@ con.setRequestProperty("authenticationkey", "demo");
 
 String body = "{"
         + "\"referenceId\": \"123456789\","
-        + "\"amount\": \"100\","
+        + "\"amount\": \"1000\","
         + "\"description\": \"TV LG 42\","
         + "    \"customer\": {"
         + "       \"name\": \"COMPRADOR TESTE\","
@@ -942,6 +973,8 @@ String body = "{"
         + "       \"email\" : \"comprador@ntk.com\","
         + "           \"address\" : {"
         + "               \"address\" : \"Rua Fidencio Ramos 100\","
+        + "               \"number\": \" 100\","
+        + "               \"complement\": \"Apartamento 22\","
         + "               \"district\" : \"Vila Olimpia\","
         + "               \"zipcode\" : \"05890090\","
         + "               \"city\" : \"Sao Paulo\","
@@ -981,6 +1014,7 @@ System.out.println(response);
 |`customer.email`|Texto|100|Sim|Email do portador do cartão.|
 |`address.address`|Texto|60|Sim|Endereço do comprador.|
 |`address.number`|Texto|10|Sim|Número do comprador.|
+|`address.complement`|Texto|150|Não|Complemento do endereço do comprador.|
 |`address.district`|Texto|80|Sim|Bairro do comprador.|
 |`address.zipcode`|Número|8|Sim|CEP do comprador.|
 |`address.city`|Texto|30|Sim|Cidade do comprador.|
@@ -993,9 +1027,9 @@ System.out.println(response);
 {
     "transactionId": "6400d988-cc4b-4084-80ee-d5575dbbed4d",
     "referenceId": "19893211234",
-    "amount": "100",
+    "amount": "1000",
     "description": "Produto ou serviço",
-    "dtTransaction": "2017-03-05T16:16:14-0200",
+    "dtTransaction": "2018-03-05T16:16:14-0200",
     "customer": {
       "name": "Comprador",
       "document": "12345678909",
@@ -1003,6 +1037,7 @@ System.out.println(response);
       "address": {
         "address": "Endereco 100",
         "number" : "100",
+        "complement": "Apartamento 22",
         "district": "Vila Olimpia",
         "zipcode": "05890090",
         "city": "Sao Paulo",
@@ -1079,7 +1114,7 @@ System.out.println(response);
 
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|----|-------|-----------|---------|
-|`transactionId`|Texto|150|Sim|Identificador da transação do GATE2all.|
+|`transactionId`|Texto|150|Sim|Identificador da transação (autorização) do GATE2all.|
 
 ### RESPOSTA
 
@@ -1089,27 +1124,29 @@ System.out.println(response);
 {
     "transactionId": "62f5a0b2-c632-4e4e-bc51-3b6681a54a3c",
     "referenceId": "1488917347840",
-    "amount": "100",
+    "amount": "1000",
     "status": 6,
-    "dtTransaction": "2017-03-07T17:09:07",
+    "dtTransaction": "2018-03-07T17:09:07",
     "payment": {
         "card": {
+          "type": 1,
+          "installments": 1,
+          "capture": false,
+          "recurrent": false,
+          "authenticate": 3,
+          "interestType": 1,
+          "saveCard": false,
           "provider": "CIELO",
+          "providerVersion": "3.0",
           "authenticationECI": 7,
           "codAuthorization": "123456",
           "providerReference": "100699306900094D905A",
           "providerCode": "00",
           "providerMessage": "Transacao capturada com sucesso",
-          "type": "1",
-          "installments": 1,
-          "capture": false,
-          "authenticate": 3,
-          "interestType": 1,
-          "integrationType": 1,
-          "saveCard": false,
           "cardInfo": {
               "number": "421847******1234",
-              "brand": "VISA"
+              "brand": "VISA",
+              "holderName": "HOLDER NAME"
           }
         }
     },
@@ -1139,7 +1176,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions/{{transactionId}}/capture?amount=100");
+URL obj = new URL("https://api.2all.com.br/v1/transactions/{{transactionId}}/capture?amount=200");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 con.setRequestProperty("content-type", "application/json");
@@ -1167,27 +1204,30 @@ System.out.println(response);
 {
     "transactionId": "62f5a0b2-c632-4e4e-bc51-3b6681a54a3c",
     "referenceId": "1488917347840",
-    "amount": "100",
+    "amount": "1000",
     "status": 6,
-    "dtTransaction": "2017-03-07T17:09:07",
+    "dtTransaction": "2018-03-07T17:09:07",
     "payment": {
         "card": {
+          "type": 1,
+          "installments": 1,
+          "capture": false,
+          "capturedAmount": "200",
+          "recurrent": false,
+          "authenticate": 3,
+          "interestType": 3,
+          "saveCard": false,
           "provider": "CIELO",
+          "providerVersion": "3.0",
           "authenticationECI": 7,
           "codAuthorization": "123456",
           "providerReference": "100699306900094D905A",
           "providerCode": "00",
           "providerMessage": "Transacao capturada com sucesso",
-          "type": "1",
-          "installments": 1,
-          "capture": false,
-          "authenticate": 3,
-          "interestType": 3,
-          "integrationType": 1,
-          "saveCard": false,
           "cardInfo": {
               "number": "421847******1234",
-              "brand": "VISA"
+              "brand": "VISA",
+              "holderName": "HOLDER NAME"
           }
         }
     },
@@ -1252,18 +1292,18 @@ System.out.println(response);
 {
     "transactionId": "62f5a0b2-c632-4e4e-bc51-3b6681a54a3c",
     "referenceId": "1488917347840",
-    "amount": "100",
+    "amount": "200",
     "status": 9,
-    "dtTransaction": "2017-03-07T17:09:07",
+    "dtTransaction": "2018-03-07T17:09:07",
     "payment": {
         "card": {
-            "type": "1",
+            "type": 1,
             "interestType": 3,
-            "integrationType": 1,
             "installments": 1,
             "capture": false,
             "authenticate": 3,
             "provider": "CIELO",
+            "providerVersion": "3.0",
             "authenticationECI": 7,
             "codAuthorization": "123456",
             "providerReference": "100699306900094D905A",
@@ -1272,7 +1312,8 @@ System.out.println(response);
             "saveCard": false,
             "cardInfo": {
                 "number": "421847******1234",
-                "brand": "VISA"
+                "brand": "VISA",
+                "holderName": "HOLDER NAME"
             }
         }
     },
@@ -1332,10 +1373,10 @@ System.out.println(response);
   "referenceId": "1488917347840",
   "amount": "100",
   "status": 9,
-  "dtTransaction": "2017-03-07T17:09:07",
+  "dtTransaction": "2018-03-07T17:09:07",
   "payment": {
     "card": {
-      "type": "1",
+      "type": 1,
       "interestType": 3,
       "integrationType": 1,
       "installments": 1,
@@ -1344,9 +1385,13 @@ System.out.println(response);
       "codAuthorization": "123456",
       "providerReference": "100699306900094D905A",
       "saveCard": false,
+      "recurrent": false,
+      "provider": "CIELO",
+      "providerVersion": "3.0",
       "cardInfo": {
         "number": "421847******1234",
-        "brand": "VISA"
+        "brand": "VISA",
+        "holderName": "HOLDER NAME"
       }
     }
   },
@@ -1363,9 +1408,9 @@ System.out.println(response);
 {
   "transactionId": "7365ca65-70d4-4d7c-ac3d-a20f5730c241",
   "referenceId": "19893211234",
-  "amount": "100",
+  "amount": "1000",
   "description": "Produto ou serviço",
-  "dtTransaction": "2017-03-08T10:46:31-0300",
+  "dtTransaction": "2018-03-08T10:46:31-0300",
   "customer": {
     "name": "Comprador",
     "document": "12345678909",
@@ -1373,6 +1418,7 @@ System.out.println(response);
     "address": {
       "address": "Endereco",
       "number": "100",
+      "complement": "Apartamento 22",
       "district": "Vila Olimpia",
       "zipcode": "09878675",
       "city": "Sao Paulo",
@@ -1382,12 +1428,12 @@ System.out.println(response);
   "payment": {
     "bankSlip": {
       "providerReference": "20575112",
-      "emissionDate": "2017-03-08",
-      "expirationDate": "2017-03-10",
+      "emissionDate": "2018-03-08",
+      "expirationDate": "2018-03-10",
       "instructions": "Aceitar somente até a data de vencimento, após essa data juros de 1% dia",
       "guarantor": "Comprador",
       "provider": "ITAU",
-      "paymentDate": "2017-03-10",
+      "paymentDate": "2018-03-08",
       "paymentAmount": "100",
       "url": "https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
     }
@@ -1402,9 +1448,9 @@ System.out.println(response);
 {
     "transactionId": "6400d988-cc4b-4084-80ee-d5575dbbed4d",
     "referenceId": "19893211234",
-    "amount": "100",
+    "amount": "1000",
     "description": "Produto ou serviço",
-    "dtTransaction": "2017-03-05T16:16:14-0200",
+    "dtTransaction": "2018-03-05T16:16:14-0200",
     "customer": {
       "name": "Comprador",
       "document": "12345678909",
@@ -1412,6 +1458,7 @@ System.out.println(response);
       "address": {
         "address": "Endereco 100",
         "number" : "100",
+        "complement": "Apartamento 22",
         "district": "Vila Olimpia",
         "zipcode": "05890090",
         "city": "Sao Paulo",
@@ -1442,21 +1489,23 @@ System.out.println(response);
 |`customer.mail`|Texto|40|Não|E-mail do portador do cartão.|
 |`address.address`|Texto|60|Sim|Endereço do comprador.|
 |`address.number`|Texto|10|Sim|Número do comprador.|
+|`address.complement`|Texto|150|Não|Complemento do endereço do comprador.|
 |`address.district`|Texto|80|Sim|Bairro do comprador.|
 |`address.zipcode`|Número|8|Sim|CEP do comprador.|
 |`address.city`|Texto|30|Sim|Cidade do comprador.|
 |`address.state`|Texto|2|Sim|Sigla do estado do comprador.|
-|`card.type`|Inteiro|—|Não|Configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.|
+|`card.type`|Número|1|Não|Configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.|
 |`card.installments`|Número|2|Sim|Número de parcelas.|
 |`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
-|`card.authenticate`|Número|1|Não|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
-|`card.interestType`|Número|1|Sim|Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
+|`card.authenticate`|Número|1|Não|**Default: 3** - Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
+|`card.interestType`|Número|1|Não|**Default: 3** - Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
 |`card.integrationType`|Número|1|Sim|Tipo de integração disponível pelo Gate2All: <BR /> 1. Integrado<BR /> 2. Loja <BR /> 3. Direto|
 |`card.saveCard`|Booleano|—|Sim|Configura salvar o cartão (tokenização). |
 |`card.codAuthorization`|Texto|100|Codigo de autorização da instituição.|
 |`card.providerReference`|Texto|100|Referência da instituição.|
 |`cardInfo.number`|Texto|19|Sim|Número do cartão.|
 |`cardInfo.brand`|Texto|20|Sim|Bandeira do cartão. [Bandeiras](#bandeiras).|
+|`cardInfo.holderName`|Texto|25|Nome do portador do cartão.|
 |`bankSlip.emissionDate`|Texto|20|Sim|Data de emissão do boleto. formato **YYYY-MM-DD**|
 |`bankSlip.expirationDate`|Texto|20|Sim|Data de vencimento do boleto. formato **YYYY-MM-DD**|
 |`bankSlip.instructions`|Texto|300|Sim|Instruções do boleto.|
@@ -1514,8 +1563,8 @@ System.out.println(response);
   {
     "transactionId": "b9a37a7b-5ffe-4993-82ab-a26b6f332afe",
     "amount": "100",
-    "status": 7,
-    "dtTransaction": "2017-03-15T11:17:40"
+    "status": 6,
+    "dtTransaction": "2018-02-15T11:17:40"
   }
 ]
 ```
@@ -1578,13 +1627,13 @@ System.out.println(response);
     "transactionId": "894aa0ad-517a-435c-b95d-8f60f1a2b9f5",
     "amount": "100",
     "status": 5,
-    "dtTransaction": "2017-03-16T07:37:23"
+    "dtTransaction": "2018-02-16T07:37:23"
   },
   {
     "transactionId": "5dbc102d-2b4b-4755-9f14-1b4c3d8a6716",
     "amount": "100",
     "status": 5,
-    "dtTransaction": "2017-03-16T07:37:00"
+    "dtTransaction": "2018-02-16T07:37:00"
   }
 ]
 ```
@@ -1762,7 +1811,7 @@ Para realizar uma tokenização direta é necessário enviar um POST para o segu
     "cardInfo": {
       "number": "4024007148992927",
       "expirationMonth": "04",
-      "expirationYear": "2017",
+      "expirationYear": "2019",
       "brand": "VISA",
       "holderName": "Comprador"
     }
@@ -1796,7 +1845,7 @@ String body = "{"
     + "    \"cardInfo\": {"
     + "        \"number\": \"4556326359707410\","
     + "        \"expirationMonth\": \"04\","
-    + "        \"expirationYear\": \"2017\","
+    + "        \"expirationYear\": \"2019\","
     + "        \"brand\": \"VISA\","
     + "        \"holderName\": \"Comprador\""
     + "      }"
@@ -1819,12 +1868,12 @@ System.out.println(response);
 |Propriedade|Tipo|Tamanho|Descrição|
 |-----------|:----:|:-------:|---------|
 |`referenceId`|Texto|100|Sim|Número de identificação da loja.|
-|`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
+|`postBackUrl`|Texto|—|URL onde o GATE2all notificará os dados da tokenização.|
 |`cardInfo.number`|Texto|20|Número do cartão truncado.|
 |`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
-|`cardInfo.expirationYear`|Número|4|Ano da validade do cartão.|
+|`cardInfo.expirationYear`|Número|4|Ano da validade do cartão. Formato **YYYY**|
 |`cardInfo.brand`|Texto|20|Bandeira do cartão.[Bandeiras](#bandeiras).|
-|`cardInfo.holderName`|Texto|100|Nome do portador do cartão.|
+|`cardInfo.holderName`|Texto|25|Nome do portador do cartão.|
 
 ### RESPOSTA
 
@@ -1920,16 +1969,16 @@ System.out.println(response);
 |Propriedade|Tipo|Tamanho|Descrição|
 |-----------|:----:|:-------:|---------|
 |`tokenizationId`|Texto|36|Identificador da tokenização do GATE2all.|
-|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
-|`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
+|`referenceId`|Texto|100|Número de identificação da loja.|
+|`postBackUrl`|Texto|—|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
 |`provider`|Texto|100|Nome da Rede Adquirente.|
-|`saveCard`|Booleano|Sim|Default true|
+|`saveCard`|Booleano|Default true|
 |`cardInfo.number`|Texto|20|Número do cartão truncado.|
 |`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
-|`cardInfo.expirationYear`|Número|4|Ano da validade do cartão.|
+|`cardInfo.expirationYear`|Número|4|Ano da validade do cartão. Formato **YYYY**|
 |`cardInfo.brand`|Texto|20|Bandeira do cartão.[Bandeiras](#bandeiras).|
 |`cardInfo.token`|Texto|100|Token do cartão.|
-|`cardInfo.holderName`|Texto|100|Nome do portador do cartão.|
+|`cardInfo.holderName`|Texto|25|Nome do portador do cartão.|
 
 ## Consulta do token pelo Número de Referencia com Limite
 
@@ -1997,13 +2046,12 @@ System.out.println(response);
 |Propriedade|Tipo|Tamanho|Descrição|
 |-----------|:----:|:-------:|---------|
 |`tokenizationId`|Texto|36|Identificador da tokenização do GATE2all.|
-|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
-|`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
+|`referenceId`|Texto|100|Número de identificação da loja.|
 |`provider`|Texto|100|Nome da Rede Adquirente.|
-|`saveCard`|Booleano|Sim|Default true|
+|`saveCard`|Booleano|Default true|
 |`cardInfo.number`|Texto|20|Número do cartão truncado.|
 |`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
-|`cardInfo.expirationYear`|Número|4|Ano da validade do cartão.|
+|`cardInfo.expirationYear`|Número|4|Ano da validade do cartão. Formato **YYYY**|
 |`cardInfo.brand`|Texto|20|Bandeira do cartão. [Bandeiras](#bandeiras).|
 |`cardInfo.token`|Texto|100|Token do cartão.|
 
@@ -2020,7 +2068,7 @@ Para criar uma transação com token é necessário enviar um POST para o seguin
 ```json
 {
    "referenceId": "19893211234",
-   "amount": "100",
+   "amount": "1000",
    "description": "Mouse sem fio",
    "customer": {
       "name": "Comprador Teste",
@@ -2033,7 +2081,7 @@ Para criar uma transação com token é necessário enviar um POST para o seguin
           "installments": 1,
           "interestType": 3,
           "authenticate": 3,
-          "softDescriptor": "Pagamento Gate2all",
+          "softDescriptor": "Pagamento GATE2all",
           "cardInfo": {
               "token": "4b6a2aa5-de91-4d52-a4d1-f265f208e5a321"
           }
@@ -2065,7 +2113,7 @@ con.setRequestProperty("authenticationkey", "demo");
 
 String body = "{"
       + "\"referenceId\": \"123456789\","
-      + "\"amount\": \"100\","
+      + "\"amount\": \"1000\","
       + "\"description\": \"TV LG 42\","
       + "\"postBackUrl\": \"http://requestb.in/qkg1clqk\","
       + "    \"customer\": {"
@@ -2108,11 +2156,11 @@ System.out.println(response);
 |`description`|Texto|300|Não|Descrição da transação.|
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
 |`customer.document`|Texto|18|Não|Número do CPF/CNPJ do portador do cartão.|
-|`card.type`|Inteiro|—|Não|Configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.|
-|`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
+|`card.type`|Número|1|Não|**Default 1** - Configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.|
+|`card.capture`|Boolano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
 |`card.installments`|Número|2|Sim|Número de parcelas.|
-|`card.interestType`|Número|1|Sim|Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
-|`card.authenticate`|Número|1|Não|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
+|`card.interestType`|Número|1|Não|**Default: 3** - Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
+|`card.authenticate`|Número|1|Não|**Default: 3** - Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
 |`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
 |`cardInfo.token`|Texto|100|Sim|Token gerado anteriormente pela operação de Tokenização.|
 
@@ -2125,19 +2173,20 @@ System.out.println(response);
   "transactionId": "5a51ae6b-e91e-4b38-b596-e2acb77dca43",
   "referenceId": "1489093308860",
   "description": "Mouse sem fio",
-  "amount": "100",
+  "amount": "1000",
   "status": 5,
-  "dtTransaction": "2017-03-09T18:01:17",
+  "dtTransaction": "2018-03-09T18:01:17",
   "payment": {
     "card": {
       "type": 1,
       "installments": 1,
       "capture": false,
       "authenticate": 3,
-      "softDescriptor": "Pagamento Gate2all",
+      "softDescriptor": "Pagamento GATE2all",
       "interestType": 3,
       "integrationType": 1,
       "provider": "CIELO",
+      "providerVersion": "3.0",
       "authenticationECI": 7,
       "codAuthorization": "123456",
       "providerReference": "10069930690009510E9A",
@@ -2170,6 +2219,7 @@ System.out.println(response);
 |`transactionId`|Texto|150|Identificador da transação do GATE2all.|
 |`dtTransaction`|DataHora|19|Data e hora da transação.|
 |`card.provider`|Texto|100|Nome da instituição financeira.|
+|`card.providerVersion`|Texto|11|Versão da Integração do Fornecedor| 
 |`card.providerReference`|Texto|100|Referência da instituição.|
 |`card.providerMessage`|Texto|100|Mensagem da instituição.|
 |`card.providerCode`|Texto|100|Codigo de resposta da instituição.|
@@ -2178,6 +2228,37 @@ System.out.println(response);
 |`cardInfo.number`|Texto|20|Número do cartão truncado.|
 |`cardInfo.brand`|Texto|20|Bandeira do cartão.[Bandeiras](#bandeiras).|
 |`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
-|`cardInfo.expirationYear`|Número|4|Ano da validade do cartão.|
-|`cardInfo.cvv`|Número|4|Não|Código de segurança do cartão truncado|
+|`cardInfo.expirationYear`|Número|4|Ano da validade do cartão. Formato **YYYY**|
+|`cardInfo.cvv`|Número|4|Código de segurança do cartão truncado|
 |`status`|Número|2|Status da transação retornado pelo GATE2all [catálogo](#status).|
+
+
+# Notificação
+
+
+No GATE2all Loja e GATE2all Integrado é possível enviar uma URL de Notificação na requisição ou registrar essa URL no GATE2all caso seja a mesma URL para todas as requisições, o GATE2all notificará qualquer mudança de status de uma transação na URL enviada ou registrada.
+ 
+A notificação é um POST na URL com o seguinte corpo da mensagem em formato JSON:
+
+> Exemplo de notificação
+
+```json
+{
+	"transactionId": "91d4f152-7024-4a4a-a212-ab457fe6e766",
+	"referenceId": "5SVM9W4"
+}
+```
+
+```shell
+curl -X POST \
+  https://hookbin.com/bin/ZB77eo1a \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -d '{
+	"transactionId": "91d4f152-7024-4a4a-a212-ab457fe6e766",
+	"referenceId": "5SVM9W4"
+}'
+```
+
+A notificação espera como resposta um 200 (Status HTTP), caso a resposta não seja um 200, o sistema tentará 3 vezes mais. 
+Lembrando que é possível efetuar a consulta em qualquer operação, com a consulta pelo transactionId ou pelo referenceId [consulta](#consulta) 

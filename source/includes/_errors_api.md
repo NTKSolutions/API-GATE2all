@@ -22,4 +22,4 @@
 
 Propriedade | Descrição
 :----------:|---------|
-|`message`|Mensagem de erro retornado pelo Gate2all
+|`message`|Mensagem de erro retornado pelo GATE2all
