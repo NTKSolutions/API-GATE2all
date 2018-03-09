@@ -53,7 +53,7 @@ Para importar uma coleção contendo os endpoints e mensagens de exemplos, basta
 
 
 <aside class="warning">
-As informações contidas neste documento estão sujeitas a alteração sem prévio aviso.
+As informações contidas neste documento estão sujeitas a alteração sem aviso prévio.
 </aside>
 
 ### PÚBLICO
@@ -437,10 +437,14 @@ Status : 201
 }
 ```
 
-> Falha
+|Propriedade|Tipo|Tamanho|Descrição|
+|-----------|----|-------|---------|
+|`transactionId`|Texto|36|Identificador da transação do GATE2all.|
+|`url`|Texto|150|URL da intenção.|
+
+### RESPOSTA ERRO
 
 Status : 400
-
 
 ```json
 {
@@ -452,8 +456,9 @@ Status : 400
 
 |Propriedade|Tipo|Tamanho|Descrição|
 |-----------|----|-------|---------|
-|`transactionId`|Texto|36|Identificador da transação do GATE2all.|
-|`url`|Texto|150|URL da intenção.|
+|`error.message`|Texto|50|Texto informando o erro na geração da Intenção de Venda.|
+
+
 
 
 <aside class="success">
@@ -633,7 +638,7 @@ System.out.println(response);
 |`cardInfo.expirationYear`|Número|4|Sim|Ano da validade do cartão. Formato **YYYY**|
 |`cardInfo.cvv`|Número|4|Sim|Código de segurança do cartão.|
 |`cardInfo.brand`|Texto|20|Sim|Bandeira do cartão.[Bandeiras](#bandeiras).|
-|`cardInfo.holderName`|Texto|25|Não|Nome do portador do cartão, só aceita caracteres|
+|`cardInfo.holderName`|Texto|25|Não|Nome do Portador impresso no cartão, **só aceita caracteres**|
 
 ### RESPOSTA
 
@@ -1506,7 +1511,7 @@ System.out.println(response);
 |`card.providerReference`|Texto|100|Referência da instituição.|
 |`cardInfo.number`|Texto|19|Sim|Número do cartão.|
 |`cardInfo.brand`|Texto|20|Sim|Bandeira do cartão. [Bandeiras](#bandeiras).|
-|`cardInfo.holderName`|Texto|25|Nome do portador do cartão.|
+|`cardInfo.holderName`|Texto|25|Não|Nome do Portador impresso no cartão, **só aceita caracteres**|
 |`bankSlip.emissionDate`|Texto|20|Sim|Data de emissão do boleto. formato **YYYY-MM-DD**|
 |`bankSlip.expirationDate`|Texto|20|Sim|Data de vencimento do boleto. formato **YYYY-MM-DD**|
 |`bankSlip.instructions`|Texto|300|Sim|Instruções do boleto.|
@@ -1874,8 +1879,7 @@ System.out.println(response);
 |`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
 |`cardInfo.expirationYear`|Número|4|Ano da validade do cartão. Formato **YYYY**|
 |`cardInfo.brand`|Texto|20|Bandeira do cartão.[Bandeiras](#bandeiras).|
-|`cardInfo.holderName`|Texto|25|Nome do portador do cartão.|
-
+|`cardInfo.holderName`|Texto|25|Nome do Portador impresso no cartão, **só aceita caracteres**|
 ### RESPOSTA
 
 > Tokenização gerada
@@ -1979,7 +1983,7 @@ System.out.println(response);
 |`cardInfo.expirationYear`|Número|4|Ano da validade do cartão. Formato **YYYY**|
 |`cardInfo.brand`|Texto|20|Bandeira do cartão.[Bandeiras](#bandeiras).|
 |`cardInfo.token`|Texto|100|Token do cartão.|
-|`cardInfo.holderName`|Texto|25|Nome do portador do cartão.|
+|`cardInfo.holderName`|Texto|25|Nome do Portador impresso no cartão, **só aceita caracteres**|
 
 ## Consulta do token pelo Número de Referencia com Limite
 
