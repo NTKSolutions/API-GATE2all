@@ -634,7 +634,7 @@ System.out.println(response);
 |`card.saveCard`|Booleano|—|Não|**Default: false** - Configura salvar o cartão (tokenização). |
 |`card.recurrent`|Booleano|—|Não|**Default: false** - Informa se a transação é recorrente. |
 |`cardInfo.number`|Texto|19|Sim|Número do cartão.|
-|`cardInfo.expirationMonth`|Número|2|Sim|Mês da validade do cartão.|
+|`cardInfo.expirationMonth`|Número|2|Sim|Mês da validade do cartão. Formato **MM**|
 |`cardInfo.expirationYear`|Número|4|Sim|Ano da validade do cartão. Formato **YYYY**|
 |`cardInfo.cvv`|Número|4|Sim|Código de segurança do cartão.|
 |`cardInfo.brand`|Texto|20|Sim|Bandeira do cartão.[Bandeiras](#bandeiras).|
@@ -1876,7 +1876,7 @@ System.out.println(response);
 |`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`postBackUrl`|Texto|—|URL onde o GATE2all notificará os dados da tokenização.|
 |`cardInfo.number`|Texto|20|Número do cartão truncado.|
-|`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
+|`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão. Formato **MM**|
 |`cardInfo.expirationYear`|Número|4|Ano da validade do cartão. Formato **YYYY**|
 |`cardInfo.brand`|Texto|20|Bandeira do cartão.[Bandeiras](#bandeiras).|
 |`cardInfo.holderName`|Texto|25|Nome do Portador impresso no cartão, **só aceita caracteres**|
@@ -1979,7 +1979,7 @@ System.out.println(response);
 |`provider`|Texto|100|Nome da Rede Adquirente.|
 |`saveCard`|Booleano|Default true|
 |`cardInfo.number`|Texto|20|Número do cartão truncado.|
-|`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
+|`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão. Formato **MM**|
 |`cardInfo.expirationYear`|Número|4|Ano da validade do cartão. Formato **YYYY**|
 |`cardInfo.brand`|Texto|20|Bandeira do cartão.[Bandeiras](#bandeiras).|
 |`cardInfo.token`|Texto|100|Token do cartão.|
@@ -2055,7 +2055,7 @@ System.out.println(response);
 |`provider`|Texto|100|Nome da Rede Adquirente.|
 |`saveCard`|Booleano|Default true|
 |`cardInfo.number`|Texto|20|Número do cartão truncado.|
-|`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
+|`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão. Formato **MM**|
 |`cardInfo.expirationYear`|Número|4|Ano da validade do cartão. Formato **YYYY**|
 |`cardInfo.brand`|Texto|20|Bandeira do cartão. [Bandeiras](#bandeiras).|
 |`cardInfo.token`|Texto|100|Token do cartão.|
@@ -2232,7 +2232,7 @@ System.out.println(response);
 |`card.authenticationECI`|Texto|100|Indicador de autenticação da transação.[Códigos ECI](#status-eci)|
 |`cardInfo.number`|Texto|20|Número do cartão truncado.|
 |`cardInfo.brand`|Texto|20|Bandeira do cartão.[Bandeiras](#bandeiras).|
-|`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
+|`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão. Formato **MM**|
 |`cardInfo.expirationYear`|Número|4|Ano da validade do cartão. Formato **YYYY**|
 |`cardInfo.cvv`|Número|4|Código de segurança do cartão truncado|
 |`status`|Número|2|Status da transação retornado pelo GATE2all [catálogo](#status).|
