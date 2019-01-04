@@ -213,6 +213,7 @@ Disponibilizamos os seguintes cartões de testes para simular os status das tran
 
 Status | Cartão |
 -------|------- |
+<<<<<<< HEAD
 AUTORIZADA | Qualquer número de cartão que respeite <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Algoritmo Luhn</a>
 FALHA NA COMUNICAÇÃO COM FORNECEDOR | 4676674786512068
 PENDENTE DE CONFIRMAÇÃO TRANSAÇÃO_NAO_PROCESSADA NOFORNECEDOR | 4532365531093678
@@ -234,6 +235,18 @@ CONFIRMADA (BOLETO PAGO MAIOR +R$10,00) | 34331423786
 CONFIRMADA (BOLETO PAGO MENOR -R$10,00) | 18805556890
 CONFIRMADA (TRANSFERÊNCIA) | 45601654247
 CONFIRMADA (BOLETO) | 74717683471
+=======
+AUTORIZADA | Qualquer número de cartão que respeite [Algoritmo Luhn](https://en.wikipedia.org/wiki/Luhn_algorithm)
+FALHA_NA_COMUNICACAO_COM_FORNECEDOR | 4676674786512068
+PENDENTE_DE_CONFIRMACAO | 4532365531093678
+TRANSACAO_INICIADA | 4490861761911670
+NEGADA | 4035943194824415 
+TIMEOUT | 4539591924980550
+
+<aside class="warning">
+Não utilize números de cartões reais.
+</aside>
+>>>>>>> d61b8502008205632405be76efa77831aab058be
 
 
 # Autenticação
@@ -242,7 +255,7 @@ Todas as requisições são autenticadas através das credenciais de acesso (USU
 
 * `Content-Type: application/json`
 * `authenticationApi: USUÁRIO`
-* `authenticarionKey: CHAVE`
+* `authenticationKey: CHAVE`
 
 **Exemplo de configuração no POSTMAN:**
 
@@ -270,7 +283,11 @@ Para realizar uma intenção de venda é necessário enviar um POST para o segui
     "description": "Mouse sem fio",
     "postBackUrl": "http://url-notificacao",
     "redirectUrl": "http://url-redirect",
+<<<<<<< HEAD
     "dtExpiration": "2018-03-25T18:10:53",
+=======
+    "dtExpiration": "2017-08-25T18:10:53",
+>>>>>>> d61b8502008205632405be76efa77831aab058be
     "customer": {
         "name": "Comprador Teste",
         "document": "12345678909",
@@ -324,7 +341,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/intention");
+URL obj = new URL("https://api.gate2all.com.br/v1/intention");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -338,7 +355,11 @@ String body = "{"
         + "\"description\": \"Mouse sem fio\","
         + "\"postBackUrl\": \"http://url-notificacao\","
         + "\"redirectUrl\": \"http://url-redirect\","
+<<<<<<< HEAD
         + "\"dtExpiration\": \"2018-01-25T18:10:53\","
+=======
+        + "\"dtExpiration\": \"2017-08-25T18:10:53\","
+>>>>>>> d61b8502008205632405be76efa77831aab058be
         + "    \"customer\": {"
         + "       \"name\": \"Comprador Teste\","
         + "       \"document\": \"12345678909\","
@@ -397,11 +418,17 @@ System.out.println(response);
 |`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`amount`|Número|16|Sim|Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
 |`description`|Texto|300|Não|Descrição da transação.|
+<<<<<<< HEAD
 |`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da trancação para o lojista [notificação](#notifica-o)|
 |`redirectUrl`|Texto|—|Não|URL onde o GATE2all redirecionará o comprador após o processamento da transação.|
 |`dtExpiration`|Texto|20|Não|Data da expiração da intenção. Formato **2018-01-25T18:10:53** |
+=======
+|`postBackUrl`|Texto|300|Sim|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
+|`redirectUrl`|Texto|300|Não|URL onde o GATE2all redirecionará o comprador após o processamento da transação.|
+|`dtExpiration`|Texto|20|Não|Data da expiração da intenção. Formato **2017-08-25T18:10:53** |
+>>>>>>> d61b8502008205632405be76efa77831aab058be
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
-|`customer.document`|Texto|18|Sim|Número do CPF/CNPJ do portador do cartão.|
+|`customer.document`|Texto|18|Sim|Número do CPF/CNPJ do portador do cartão.Obs.: sem pontuação|
 |`customer.email`|Texto|100|Sim|Email do portador do cartão.|
 |`address.address`|Texto|60|Sim|Endereço do comprador.|
 |`address.number`|Texto|10|Sim|Número do endereço do comprador.|
@@ -410,6 +437,7 @@ System.out.println(response);
 |`address.zipcode`|Número|8|Sim|CEP do comprador.|
 |`address.city`|Texto|30|Sim|Cidade do comprador.|
 |`address.state`|Texto|2|Sim|Sigla do estado do comprador.|
+<<<<<<< HEAD
 |`card.type`|Número|1|Não|**Default: 0**, configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.|
 |`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação. **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura](#captura)) noutra requisição.|
 |`card.installments`|Número|2|Sim|Número de parcelas.|
@@ -419,11 +447,21 @@ System.out.println(response);
 |`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.[SoftDescriptor](#softdescriptor)|
 |`card.saveCard`|Booleano|—|Não|Configura salvar o cartão (tokenização). |
 |`card.recurrent`|Booleano|—|Não|Informa se a transação é recorrente. |
+=======
+|`card.type`|Inteiro|—|Não|Configura as opcões disponíveis: <BR /> 0. Default. 1. Configura cartão de crédito. 2 Configura cartão de débito.|
+|`card.capture`|Booleano|—|Não|**true** = Autoriza e confirma a transação. **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura](#captura)) noutra requisição.|
+|`card.installments`|Número|20|Sim|Número de parcelas.|
+|`card.fixedInstallments`|Booleano|—|Não|**True** = não permite que o comprador selecione a quantidade de parcelas no formulário de pagamento.|
+|`card.interestType`|Número|1|Sim|Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
+|`card.authenticate`|Texto|20|Sim|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
+|`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
+|`card.saveCard`|Booleano|—|Não|Configura salvar o cartão (tokenização). |
+>>>>>>> d61b8502008205632405be76efa77831aab058be
 |`electronicTransfer.provider`|Texto|20|Sim|Nome da instituição responsável pela transferência.|
 |`bankSlip.expirationDate`|Texto|20|Sim|Data de vencimento do boleto. formato **YYYY-MM-DD**|
 |`bankSlip.instructions`|Texto|300|Sim|Instruções do boleto.|
 |`bankSlip.guarantor`|Texto|45|Sim|Nome do avalista.|
-|`bankSlip.provider`|Texto|20|Sim|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
+|`bankSlip.provider`|Texto|20|Não|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
 
 
 ### RESPOSTA SUCESSO
@@ -433,7 +471,7 @@ Status : 201
 ```json
 {
   "transactionId": "b9bb32a8-401e-41a0-a9ee-af9e8ab0de92",
-  "url": "https://api.2all.com.br.com.br/v1/payment/b9bb32a8-401e-41a0-a9ee-af9e8ab0de92"
+  "url": "https://api.gate2all.com.br.com.br/v1/payment/b9bb32a8-401e-41a0-a9ee-af9e8ab0de92"
 }
 ```
 
@@ -449,7 +487,11 @@ Status : 400
 ```json
 {
   "error": {
+<<<<<<< HEAD
     "message": "amount nao pode ser vazio"
+=======
+    "message": "O campo amount e obrigatorio."
+>>>>>>> d61b8502008205632405be76efa77831aab058be
   }
 }
 ```
@@ -522,6 +564,8 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
    "referenceId": "19893211234",
    "amount": "1000",
    "description": "Mouse sem fio",
+   "postBackUrl": "http://url-notificacao",
+   "redirectUrl": "http://url-redirect",
    "customer": {
       "name": "Comprador Teste",
       "document": "12345678909"
@@ -561,7 +605,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -574,6 +618,7 @@ String body = "{"
         + "\"amount\": \"1000\","
         + "\"description\": \"Venda Teste\","
         + "\"postBackUrl\": \"http://url-notificacao\","
+        + "\"redirectUrl\": \"http://url-redirect\","
         + "\"customer\": {"
         + "    \"name\": \"COMPRADOR TESTE\","
         + "     \"document\": \"23650403811\""
@@ -620,6 +665,7 @@ System.out.println(response);
 |`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`amount`|Número|16|Sim|Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
 |`description`|Texto|300|Não|Descrição da transação.|
+<<<<<<< HEAD
 |`postBackUrl`|Texto|—|Não|URL onde o GATE2all notificará eventuais status da trancação para o lojista [notificação](#notifica-o)|
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
 |`customer.document`|Texto|18|Não|Número do CPF/CNPJ do portador do cartão.|
@@ -633,6 +679,20 @@ System.out.println(response);
 |`card.providerVersion`|Texto|11|Não|Versão da Integração do Fornecedor| 
 |`card.saveCard`|Booleano|—|Não|**Default: false** - Configura salvar o cartão (tokenização). |
 |`card.recurrent`|Booleano|—|Não|**Default: false** - Informa se a transação é recorrente. |
+=======
+|`postBackUrl`|Texto|—|Não|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
+|`redirectUrl`|Texto|—|Não|URL onde o GATE2all retornará para concluir o processo do pagamento.|
+|`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
+|`customer.document`|Texto|18|Não|Número do CPF/CNPJ do portador do cartão.|
+|`card.type`|Inteiro|—|Sim|Opções disponíveis: <BR /> 1. Configura cartão de crédito. <BR /> 2. Configura cartão de débito.|
+|`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
+|`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
+|`card.installments`|Número|2|Sim|Número de parcelas.|
+|`card.interestType`|Número|1|Sim|Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
+|`card.authenticate`|Número|1|Sim|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
+|`card.provider`|Número|—|Não|Nome do Meio de Pagamento - (OBS: funcionalidade ainda não disponível)|
+|`card.saveCard`|Booleano|—|Não|Configura salvar o cartão (tokenização). |
+>>>>>>> d61b8502008205632405be76efa77831aab058be
 |`cardInfo.number`|Texto|19|Sim|Número do cartão.|
 |`cardInfo.expirationMonth`|Número|2|Sim|Mês da validade do cartão. Formato **MM**|
 |`cardInfo.expirationYear`|Número|4|Sim|Ano da validade do cartão. Formato **YYYY**|
@@ -682,7 +742,9 @@ System.out.println(response);
   "customer": {
     "name": "HOLDER NAME",
     "document": "12345678909"
-  }
+  },
+  "postBackUrl": "http://url-notificacao",
+  "redirectUrl": "http://url-redirect",
 }
 ```
 
@@ -776,7 +838,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -885,7 +947,7 @@ System.out.println(response);
       "provider": "ITAU",
       "paymentDate": "2018-03-08",
       "paymentAmount": "100",
-      "url": "https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
+      "url": "https://api.gate2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
     }
   },
   "status": 0
@@ -961,7 +1023,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -1054,7 +1116,7 @@ System.out.println(response);
         "electronicTransfer": {
             "providerReference": "20518839",
             "provider": "Itau",
-            "url": "https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
+            "url": "https://api.gate2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
         }
     },
     "status": 0
@@ -1103,7 +1165,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions/{{transactionId}}/capture");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions/{{transactionId}}/capture");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 con.setRequestProperty("content-type", "application/json");
@@ -1182,7 +1244,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
+<<<<<<< HEAD
 URL obj = new URL("https://api.2all.com.br/v1/transactions/{{transactionId}}/capture?amount=200");
+=======
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions/{{transactionId}}/capture?amount=100");
+>>>>>>> d61b8502008205632405be76efa77831aab058be
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 con.setRequestProperty("content-type", "application/json");
@@ -1271,7 +1337,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions/957221f5-d08b-4445-9896-52152f31b846/void");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions/957221f5-d08b-4445-9896-52152f31b846/void");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 con.setRequestProperty("content-type", "application/json");
@@ -1349,7 +1415,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions/d31dcd70-6666-40af-85ba-ed1ff23bc293");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions/d31dcd70-6666-40af-85ba-ed1ff23bc293");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 con.setRequestProperty("content-type", "application/json");
@@ -1441,7 +1507,7 @@ System.out.println(response);
       "provider": "ITAU",
       "paymentDate": "2018-03-08",
       "paymentAmount": "100",
-      "url": "https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
+      "url": "https://api.gate2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
     }
   },
   "status": 0
@@ -1475,7 +1541,7 @@ System.out.println(response);
         "electronicTransfer": {
             "providerReference": "20518839",
             "provider": "Itau",
-            "url": "https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
+            "url": "https://api.gate2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
         }
     },
     "status": 0
@@ -1500,7 +1566,11 @@ System.out.println(response);
 |`address.zipcode`|Número|8|Sim|CEP do comprador.|
 |`address.city`|Texto|30|Sim|Cidade do comprador.|
 |`address.state`|Texto|2|Sim|Sigla do estado do comprador.|
+<<<<<<< HEAD
 |`card.type`|Número|1|Não|Configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.|
+=======
+|`card.type`|Inteiro|—|Não|Opções disponíveis: <BR /> 1. Configura cartão de crédito. <BR /> 2. Configura cartão de débito.|
+>>>>>>> d61b8502008205632405be76efa77831aab058be
 |`card.installments`|Número|2|Sim|Número de parcelas.|
 |`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
 |`card.authenticate`|Número|1|Não|**Default: 3** - Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
@@ -1540,7 +1610,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions?referenceId=1493321061725");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions?referenceId=1493321061725");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 con.setRequestProperty("content-type", "application/json");
@@ -1569,8 +1639,13 @@ System.out.println(response);
   {
     "transactionId": "b9a37a7b-5ffe-4993-82ab-a26b6f332afe",
     "amount": "100",
+<<<<<<< HEAD
     "status": 6,
     "dtTransaction": "2018-02-15T11:17:40"
+=======
+    "status": 7,
+    "dtTransaction": "2017-03-15T11:17:40"
+>>>>>>> d61b8502008205632405be76efa77831aab058be
   }
 ]
 ```
@@ -1602,7 +1677,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions?referenceId=1493321061725&limit=2");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions?referenceId=1493321061725&limit=2");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 con.setRequestProperty("content-type", "application/json");
@@ -1633,13 +1708,21 @@ System.out.println(response);
     "transactionId": "894aa0ad-517a-435c-b95d-8f60f1a2b9f5",
     "amount": "100",
     "status": 5,
+<<<<<<< HEAD
     "dtTransaction": "2018-02-16T07:37:23"
+=======
+    "dtTransaction": "2017-03-16T07:37:23"
+>>>>>>> d61b8502008205632405be76efa77831aab058be
   },
   {
     "transactionId": "5dbc102d-2b4b-4755-9f14-1b4c3d8a6716",
     "amount": "100",
     "status": 5,
+<<<<<<< HEAD
     "dtTransaction": "2018-02-16T07:37:00"
+=======
+    "dtTransaction": "2017-03-16T07:37:00"
+>>>>>>> d61b8502008205632405be76efa77831aab058be
   }
 ]
 ```
@@ -1714,7 +1797,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/tokenization/intention");
+URL obj = new URL("https://api.gate2all.com.br/v1/tokenization/intention");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -1747,9 +1830,9 @@ System.out.println(response);
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|----|-------|-----------|---------|
 |`referenceId`|Texto|100|Sim|Número de identificação da loja.|
-|`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da tokenização para o lojista.|
-|`redirectUrl`|Texto|—|Sim|URL onde o GATE2all redirecionará o comprador após o processamento da tokenização.|
-|`brand`|Texto|20|Não|Bandeira do cartão.[Bandeiras](#bandeiras).|
+|`postBackUrl`|Texto|300|Sim|URL onde o GATE2all notificará eventuais status da tokenização para o lojista.|
+|`redirectUrl`|Texto|300|Sim|URL onde o GATE2all redirecionará o comprador após o processamento da tokenização.|
+|`cardInfo.brand`|Texto|20|Não|Bandeira do cartão.[Bandeiras](#bandeiras).|
 
 
 ### RESPOSTA
@@ -1761,7 +1844,7 @@ System.out.println(response);
   "referenceId": "1495660823910",
   "postBackUrl": "http://url-notificacao",
   "redirectUrl": "http://url-redirect",
-  "url": "http://api.2all.com.br/v1/save-card/b303e861-37d3-4d11-866b-735c6ff58989",
+  "url": "http://api.gate2all.com.br/v1/save-card/b303e861-37d3-4d11-866b-735c6ff58989",
   "saveCard": true,
   "cardInfo": {
     "brand": "VISA"
@@ -1837,7 +1920,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/tokenization");
+URL obj = new URL("https://api.gate2all.com.br/v1/tokenization");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -1871,15 +1954,25 @@ System.out.println(response);
 
 ```
 
-|Propriedade|Tipo|Tamanho|Descrição|
-|-----------|:----:|:-------:|---------|
+|Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
+|-----------|----|-------|-----------|---------|
 |`referenceId`|Texto|100|Sim|Número de identificação da loja.|
+<<<<<<< HEAD
 |`postBackUrl`|Texto|—|URL onde o GATE2all notificará os dados da tokenização.|
 |`cardInfo.number`|Texto|20|Número do cartão truncado.|
 |`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão. Formato **MM**|
 |`cardInfo.expirationYear`|Número|4|Ano da validade do cartão. Formato **YYYY**|
 |`cardInfo.brand`|Texto|20|Bandeira do cartão.[Bandeiras](#bandeiras).|
 |`cardInfo.holderName`|Texto|25|Nome do Portador impresso no cartão, **só aceita caracteres**|
+=======
+|`postBackUrl`|Texto|300|Não|URL onde o GATE2all notificará as informações do token gerado para o lojista.|
+|`cardInfo.number`|Texto|20|Sim|Número do cartão truncado.|
+|`cardInfo.expirationMonth`|Número|2|Sim|Mês da validade do cartão.|
+|`cardInfo.expirationYear`|Número|4|Sim|Ano da validade do cartão.|
+|`cardInfo.brand`|Texto|20|Sim|Bandeira do cartão.[Bandeiras](#bandeiras).|
+|`cardInfo.holderName`|Texto|100|Não|Nome do portador do cartão.|
+
+>>>>>>> d61b8502008205632405be76efa77831aab058be
 ### RESPOSTA
 
 > Tokenização gerada
@@ -1929,7 +2022,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/tokenization/be4cbeb1-abb2-4913-8165-f86962143fa021");
+URL obj = new URL("https://api.gate2all.com.br/v1/tokenization/be4cbeb1-abb2-4913-8165-f86962143fa021");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 con.setRequestProperty("content-type", "application/json");
@@ -2000,7 +2093,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/tokenization?referenceId=1496173577825&limit=2");
+URL obj = new URL("https://api.gate2all.com.br/v1/tokenization?referenceId=1496173577825&limit=2");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 con.setRequestProperty("content-type", "application/json");
@@ -2108,7 +2201,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -2161,8 +2254,13 @@ System.out.println(response);
 |`description`|Texto|300|Não|Descrição da transação.|
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
 |`customer.document`|Texto|18|Não|Número do CPF/CNPJ do portador do cartão.|
+<<<<<<< HEAD
 |`card.type`|Número|1|Não|**Default 1** - Configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.|
 |`card.capture`|Boolano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
+=======
+|`card.type`|Inteiro|—|Sim|1. Transação com token só disponível para cartão de crédito.|
+|`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, precisando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
+>>>>>>> d61b8502008205632405be76efa77831aab058be
 |`card.installments`|Número|2|Sim|Número de parcelas.|
 |`card.interestType`|Número|1|Não|**Default: 3** - Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
 |`card.authenticate`|Número|1|Não|**Default: 3** - Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
