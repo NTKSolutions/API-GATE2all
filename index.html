@@ -2141,7 +2141,24 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td><code class="prettyprint">GetNet</code></td>
 <td>Até 2 dias.</td>
 </tr>
+<tr>
+<td><code class="prettyprint">Rede (Crédito)</code></td>
+<td>Total/Parcial - 90 dias</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Rede (Débito)</code></td>
+<td>Total/Parcial - 7 dias</td>
+</tr>
 </tbody></table>
+
+<p>Para a adquirente <b>"Rede"</b> também é possível fazer um cancelamento parcial, informando o valor no parâmetro 'amount'. Caso não seja informado, será cancelado o valor total.</p>
+
+<p>O cancelamento realizado para o adquirente <b>"Rede"</b>, segue as seguintes regras:</p>
+
+<ul>
+<li>Mesmo dia da transação - Resposta imediata (Cancelada/Negada).</li>
+<li>Próximos dias - Solicita o cancelamento no formato D+1.</li>
+</ul>
 
 <h3 id="requisi-o">Requisição</h3>
 
