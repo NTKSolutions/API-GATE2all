@@ -3110,7 +3110,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <p><strong>REGRAS DA TOKENIZAÇÃO:</strong></p>
 
 <ul>
-<li><strong>Disponível somente para adquirente Cielo.</strong></li>
+<li><strong>Disponível somente para adquirente Cielo e Rede.</strong></li>
 <li>Cada código de token é único por estabelecimento comercial. Se o mesmo cartão for “tokenizado” para outro estabelecimento, este terá um token diferente.</li>
 <li>Caso um estabelecimento envie duas ou mais vezes para gravar os mesmos dados de cartão, será retornado sempre o mesmo token.</li>
 <li>Não há garantia que o cartão gravado terá todas as suas transações autorizadas, pois são processos independentes e distintos.</li>
@@ -3923,6 +3923,13 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 <td>100</td>
 <td>Sim</td>
 <td>Token gerado anteriormente pela operação de Tokenização.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.cvv</code></td>
+<td>Número</td>
+<td>4</td>
+<td>Não</td>
+<td>Código de segurança do cartão. Ao informar torna a transação mais segura.</td>
 </tr>
 </tbody></table>
 
