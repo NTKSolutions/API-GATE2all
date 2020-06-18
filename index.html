@@ -1259,6 +1259,230 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </tr>
 </tbody></table>
 
+
+
+
+<h2 id="threeds-o">3D Secure</h2>
+
+<p>Transações autenticadas 3D Secure ou 3DS, são transações que necessitam de uma autenticação adicional para garantir maior segurança ao portador do cartão nas compras online.</p>
+
+<p>A autenticação 3DS é efetuada através da validação de dados que apenas o portador do cartão e o banco possuem, como por exemplo, senha do cartão, data de nascimento, código de segurança, token do banco.</p>
+
+<p><strong>Autorização com 3DS está disponível apenas para a adquirente Rede, sendo:</strong></p>
+
+<ul>
+<li><strong>Obrigatório para operações com cartão de Débito</strong></li>
+<li><strong>Opcional para operações com cartão de Crédito</strong></li>
+</ul>
+
+<h3 id="requisi-o">REQUISIÇÃO</h3>
+
+<aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/transactions</span></aside>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mouse sem fio"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="mi">"Mozilla/5.0 ..."</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador Teste"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"interestType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pagamento GATE2all"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"recurrent"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"providerVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.0"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4539708473330561"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"234"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code></code></pre>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
+        <span class="o">+</span> <span class="s">"\"referenceId\": \"123456\","</span>
+        <span class="o">+</span> <span class="s">"\"amount\": \"1000\","</span>
+        <span class="o">+</span> <span class="s">"\"description\": \"Venda Teste\","</span>
+        <span class="o">+</span> <span class="s">"\"userAgent\": \"Mozilla/5.0 ...\","</span>
+        <span class="o">+</span> <span class="s">"\"postBackUrl\": \"http://url-notificacao\","</span>
+        <span class="o">+</span> <span class="s">"\"customer\": {"</span>
+        <span class="o">+</span> <span class="s">"    \"name\": \"COMPRADOR TESTE\","</span>
+        <span class="o">+</span> <span class="s">"     \"document\": \"23650403811\""</span>
+        <span class="o">+</span> <span class="s">"},"</span>
+        <span class="o">+</span> <span class="s">" \"payment\": {"</span>
+        <span class="o">+</span> <span class="s">"    \"card\": {"</span>
+        <span class="o">+</span> <span class="s">"        \"type\": 1,"</span>
+        <span class="o">+</span> <span class="s">"        \"capture\": false,"</span>
+        <span class="o">+</span> <span class="s">"        \"installments\": 1,"</span>
+        <span class="o">+</span> <span class="s">"        \"interestType\": 3,"</span>
+        <span class="o">+</span> <span class="s">"        \"authenticate\": 3,"</span>
+        <span class="o">+</span> <span class="s">"        \"saveCard\": false,"</span>
+        <span class="o">+</span> <span class="s">"        \"recurrent\": false,"</span>
+        <span class="o">+</span> <span class="s">"        \"softDescriptor\": \"Gate2All\","</span>
+        <span class="o">+</span> <span class="s">"        \"cardInfo\": {"</span>
+        <span class="o">+</span> <span class="s">"           \"number\": \"4539708473330561\","</span>
+        <span class="o">+</span> <span class="s">"           \"expirationMonth\": \"04\","</span>
+        <span class="o">+</span> <span class="s">"           \"expirationYear\": \"2019\","</span>
+        <span class="o">+</span> <span class="s">"           \"cvv\": \"234\","</span>
+        <span class="o">+</span> <span class="s">"           \"brand\": \"VISA\","</span>
+        <span class="o">+</span> <span class="s">"           \"holderName\": \"COMPRADOR TESTE\""</span>
+        <span class="o">+</span> <span class="s">"        }"</span>
+        <span class="o">+</span> <span class="s">"      }"</span>
+        <span class="o">+</span> <span class="s">"   }"</span>
+        <span class="o">+</span> <span class="s">"}"</span><span class="o">;</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">DataOutputStream</span> <span class="n">dos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">body</span><span class="o">);</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+</code></pre>
+
+<p>Além das propriedades da transação, é necessário enviar as seguintes propriedades na <code class="prettyprint">transação</code></p>
+
+<table><thead>
+<tr>
+<th width="165px">Propriedade</th>
+<th>Tipo</th>
+<th>Tamanho</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">userAgent</code></td>
+<td>Texto</td>
+<td>Até 500</td>
+<td>Sim</td>
+<td>Obrigatório para transações com 3DS. Identificador do browser utilizado pelo comprador no momento da compra.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.authenticate</code></td>
+<td>Número</td>
+<td>1</td>
+<td>Não</td>
+<td><strong>Para débito sempre será: 1<br />Para crédito o default é: 3</strong> <br /> Opções disponíveis: <br /> 1. Autorizar só transações autenticadas <br /> 2. Autorizar transações autenticadas ou não autenticadas <br /> 3. Autorizar sem autenticação</td>
+</tr>
+</tbody></table>
+
+<h3 id="resposta">RESPOSTA</h3>
+
+<blockquote>
+<p>Transação autorizada e não capturada</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"92d50ba4-5d93-4ee5-90e8-9884b250310a"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1463697571584"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TV LG 42"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 ..."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-05T12:04:20"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gate2All"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"interestType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"recurrent"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIELO"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"providerVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1006993069000834928A"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao autorizada com sucesso"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"453970******0561"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.userede.com.br/Redirect/auth?token=qNRl..."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code></code></pre>
+
+<blockquote>
+<p>Falha</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"O campo amount e obrigatorio."</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code></code></pre>
+
+
+<p>Além das propriedades da transação, será retornado a propriedade <code class="prettyprint">redirectUrl</code>, para a qual deve ser redirecionado o cliente.</p>
+
+<table><thead>
+<tr>
+<th>Propriedade</th>
+<th>Tipo</th>
+<th>Tamanho</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">redirectUrl</code></td>
+<td>Texto</td>
+<td>Até 500</td>
+<td>Url de autenticação retornada pelo sistema 3DS.</td>
+</tr>
+</tbody></table>
+
+<p><strong>A transação ficará com status <code class="prettyprint">AGUARDANDO CONFIRMACAO</code> até que receba o retorno da autenticação do 3DS.</strong></p>
+
+
+
+
 <h2 id="boleto">Boleto</h2>
 
 <p>O boleto bancário ou bloqueto é um método de pagamento de produtos ou serviços. É amplamente utilizado por empresas no Brasil.</p>
@@ -2141,7 +2365,22 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td><code class="prettyprint">GetNet</code></td>
 <td>Até 2 dias.</td>
 </tr>
+<tr>
+<td><code class="prettyprint">Rede (Crédito)</code></td>
+<td>90 dias</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Rede (Débito)</code></td>
+<td>7 dias</td>
+</tr>
 </tbody></table>
+
+<p>O cancelamento realizado para o adquirente <b>"Rede"</b>, segue as seguintes regras:</p>
+
+<ul>
+<li>Mesmo dia da transação - Resposta imediata (Cancelada/Negada).</li>
+<li>Próximos dias - Solicita o cancelamento no formato D+1.</li>
+</ul>
 
 <h3 id="requisi-o">Requisição</h3>
 
@@ -2225,6 +2464,127 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight shell"><code></code></pre>
+
+
+
+<h2 id="cancelamento-parcial">Cancelamento Parcial</h2>
+
+<p>Para realizar um cancelamento &ldquo;estorno&rdquo; parcial, deve-se observar as seguintes condições:</p>
+
+<ul>
+  <li><b>Disponível apenas para a adquirente Rede.</b></li>
+  <li>Mesmo dia da transação - Resposta imediata (Cancelada/Negada).</li>
+  <li>Próximos dias - Solicita o cancelamento no formato D+1.</li>
+</ul>
+
+<h3 id="prazos-para-cancelamento">Prazos para cancelamento parcial</h3>
+
+<table><thead>
+<tr>
+  <th>Rede adquirente</th>
+  <th>Prazo para cancelamento</th>
+</tr>
+</thead><tbody>
+<tr>
+  <td><code class="prettyprint">Rede (Crédito)</code></td>
+  <td>Total/Parcial - 90 dias</td>
+</tr>
+<tr>
+  <td><code class="prettyprint">Rede (Débito)</code></td>
+  <td>Total/Parcial - 7 dias</td>
+</tr>
+</tbody></table>
+
+<h3 id="requisi-o">Requisição</h3>
+
+<aside class="request"><span class="method put">PUT</span> <span class="endpoint">/v1/transactions/{{transactionId}}/void?amount=100</span></aside>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions/957221f5-d08b-4445-9896-52152f31b846/void?amount=100"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"PUT"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+</code></pre>
+
+<table><thead>
+<tr>
+  <th>Propriedade</th>
+  <th>Tipo</th>
+  <th>Tamanho</th>
+  <th>Obrigatório</th>
+  <th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+  <td><code class="prettyprint">transactionId</code></td>
+  <td>Texto</td>
+  <td>150</td>
+  <td>Sim</td>
+  <td>Identificador da transação do GATE2all.</td>
+</tr>
+<tr>
+  <td><code class="prettyprint">amount</code></td>
+  <td>Número</td>
+  <td>16</td>
+  <td>Sim</td>
+  <td>Valor da transação a ser cancelado sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
+</tr>
+</tbody></table>
+
+<h3 id="resposta">RESPOSTA</h3>
+
+<blockquote>
+  <p>Transação cancelada</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+</span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62f5a0b2-c632-4e4e-bc51-3b6681a54a3c"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+</span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-07T17:09:07"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+</span><span class="nt">"interestType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+</span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+</span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+</span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+</span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIELO"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"providerVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.0"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+</span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100699306900094D905A"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao cancelada com sucesso"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+</span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"421847******1234"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23650403811"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code></code></pre>
+
 
 <h1 id="consulta">Consulta</h1>
 
@@ -2886,7 +3246,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <p><strong>REGRAS DA TOKENIZAÇÃO:</strong></p>
 
 <ul>
-<li><strong>Disponível somente para adquirente Cielo.</strong></li>
+<li><strong>Disponível somente para adquirente Cielo e Rede.</strong></li>
 <li>Cada código de token é único por estabelecimento comercial. Se o mesmo cartão for “tokenizado” para outro estabelecimento, este terá um token diferente.</li>
 <li>Caso um estabelecimento envie duas ou mais vezes para gravar os mesmos dados de cartão, será retornado sempre o mesmo token.</li>
 <li>Não há garantia que o cartão gravado terá todas as suas transações autorizadas, pois são processos independentes e distintos.</li>
@@ -3700,6 +4060,13 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 <td>Sim</td>
 <td>Token gerado anteriormente pela operação de Tokenização.</td>
 </tr>
+<tr>
+<td><code class="prettyprint">cardInfo.cvv</code></td>
+<td>Número</td>
+<td>4</td>
+<td>Não</td>
+<td>Código de segurança do cartão. Ao informar torna a transação mais segura.</td>
+</tr>
 </tbody></table>
 
 <h3 id="resposta">RESPOSTA</h3>
@@ -3934,9 +4301,13 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
 <td style="text-align: center">11</td>
 <td>FALHA NA COMUNICAÇÃO COM FORNECEDOR</td>
 </tr>
+<tr>
+<td style="text-align: center">12</td>
+<td>INTENCAO CANCELADA</td>
+</tr>
 </tbody></table>
 
-          <h1 id="http-status-code">HTTP Status Code</h1>
+<h1 id="http-status-code">HTTP Status Code</h1>
 
 <table><thead>
 <tr>
