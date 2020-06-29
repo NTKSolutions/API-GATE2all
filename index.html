@@ -411,6 +411,8 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 
 <p>Através deste tipo de integração o comprador digita os dados do cartão no ambiente seguro do gateway de pagamentos <strong>GATE2all</strong>, isentando a loja, da manipulação dos dados sensíveis do cartão do comprador.</p>
 
+
+
 <h2 id="inten-o-de-venda">Intenção de Venda</h2>
 
 <p>Para realizar uma intenção de venda é necessário enviar um POST para o seguinte recurso: </p>
@@ -613,6 +615,13 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Email do portador do cartão.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">customer.phoneNumber</code></td>
+<td>Texto</td>
+<td>18</td>
+<td>Não</td>
+<td>Número de telefone do portador do cartão.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">address.address</code></td>
 <td>Texto</td>
 <td>60</td>
@@ -743,7 +752,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Texto</td>
 <td>300</td>
 <td>Sim</td>
-<td>Instruções do boleto.</td>
+<td>Instruções do boleto. <br> <strong>Para o Itaú</strong> a quantidade máxima de caracteres será: 180, e o texto será truncado em 3 partes de 60 caracteres.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">bankSlip.guarantor</code></td>
@@ -760,6 +769,8 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li></ul></td>
 </tr>
 </tbody></table>
+
+<aside>Note que para Intenção de Venda de clientes de uma Sub, os dados do customer não serão obrigatórios na intenção, mas serão obrigatórios na autorização. O formulário de checkout já trata caso não tenha os dados do customer.</aside>
 
 <h3 id="resposta-sucesso">RESPOSTA SUCESSO</h3>
 
@@ -1262,6 +1273,232 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 
 
 
+<h2 id="autorizacao-antifraude">Autorização com Antifraude</h2>
+
+<p><string>Disponível apenas para clientes de sub</string>, é obrigatória a checagem da transação em um antifraude. Atualmente com suporte apenas da konduto.</p>
+
+<h3 id="requisicao-autorizacao-antifraude">REQUISIÇÃO</h3>
+
+<aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/transactions</span></aside>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mouse sem fio"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="mi">"Mozilla/5.0 ..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"comprador@email.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"phoneNumber"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"(46) 98899 8899"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Endereco"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"number"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apartamento 22"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"district"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Vila Olimpia"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"zipcode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"09878675"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"city"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Sao Paulo"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"interestType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pagamento GATE2all"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"recurrent"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"providerVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.0"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4539708473330561"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"234"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code></code></pre>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
+    <span class="o">+</span> <span class="s">"\"referenceId\": \"123456\","</span>
+    <span class="o">+</span> <span class="s">"\"amount\": \"1000\","</span>
+    <span class="o">+</span> <span class="s">"\"description\": \"Venda Teste\","</span>
+    <span class="o">+</span> <span class="s">"\"userAgent\": \"Mozilla/5.0 ...\","</span>
+    <span class="o">+</span> <span class="s">"\"postBackUrl\": \"http://url-notificacao\","</span>
+    <span class="o">+</span> <span class="s">"\"customer\": {"</span>
+    <span class="o">+</span> <span class="s">"    \"name\": \"COMPRADOR TEST\","</span>
+    <span class="o">+</span> <span class="s">"    \"document\": \"12345678909\","</span>
+    <span class="o">+</span> <span class="s">"    \"email\" : \"comprador@ntk.com\","</span>
+    <span class="o">+</span> <span class="s">"    \"phoneNumber\" : \"(46) 98899 8899\","</span>
+    <span class="o">+</span> <span class="s">"    \"address\" : {"</span>
+    <span class="o">+</span> <span class="s">"        \"address\" : \"Rua Fidencio Ramos\","</span>
+    <span class="o">+</span> <span class="s">"        \"number\": \" 100\","</span>
+    <span class="o">+</span> <span class="s">"        \"complement\": \"Apartamento 22\","</span>
+    <span class="o">+</span> <span class="s">"        \"district\" : \"Vila Olimpia\","</span>
+    <span class="o">+</span> <span class="s">"        \"zipcode\" : \"05890090\","</span>
+    <span class="o">+</span> <span class="s">"        \"city\" : \"Sao Paulo\","</span>
+    <span class="o">+</span> <span class="s">"        \"state\" : \"SP\""</span>
+    <span class="o">+</span> <span class="s">"        }"</span>
+    <span class="o">+</span> <span class="s">"    },"</span>
+    <span class="o">+</span> <span class="s">" \"payment\": {"</span>
+    <span class="o">+</span> <span class="s">"    \"card\": {"</span>
+    <span class="o">+</span> <span class="s">"        \"type\": 1,"</span>
+    <span class="o">+</span> <span class="s">"        \"capture\": false,"</span>
+    <span class="o">+</span> <span class="s">"        \"installments\": 1,"</span>
+    <span class="o">+</span> <span class="s">"        \"interestType\": 3,"</span>
+    <span class="o">+</span> <span class="s">"        \"authenticate\": 3,"</span>
+    <span class="o">+</span> <span class="s">"        \"saveCard\": false,"</span>
+    <span class="o">+</span> <span class="s">"        \"recurrent\": false,"</span>
+    <span class="o">+</span> <span class="s">"        \"softDescriptor\": \"Gate2All\","</span>
+    <span class="o">+</span> <span class="s">"        \"cardInfo\": {"</span>
+    <span class="o">+</span> <span class="s">"           \"number\": \"4539708473330561\","</span>
+    <span class="o">+</span> <span class="s">"           \"expirationMonth\": \"04\","</span>
+    <span class="o">+</span> <span class="s">"           \"expirationYear\": \"2019\","</span>
+    <span class="o">+</span> <span class="s">"           \"cvv\": \"234\","</span>
+    <span class="o">+</span> <span class="s">"           \"brand\": \"VISA\","</span>
+    <span class="o">+</span> <span class="s">"           \"holderName\": \"COMPRADOR TESTE\""</span>
+    <span class="o">+</span> <span class="s">"        }"</span>
+    <span class="o">+</span> <span class="s">"      }"</span>
+    <span class="o">+</span> <span class="s">"   }"</span>
+    <span class="o">+</span> <span class="s">"}"</span><span class="o">;</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">DataOutputStream</span> <span class="n">dos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">body</span><span class="o">);</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+</code></pre>
+
+<p>Para os casos em que se deve utilizar o antifraude na autorização, além dos campos de uma autorização normal, outros campos passam a ser obrigatórios para o antifraude, são:</p>
+
+<table><thead>
+<tr>
+  <th width="165px">Propriedade</th>
+  <th>Tipo</th>
+  <th>Tamanho</th>
+  <th>Obrigatório</th>
+  <th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+    <td><code class="prettyprint">customer.name</code></td>
+    <td style="text-align: center">Texto</td>
+    <td style="text-align: center">100</td>
+    <td style="text-align: center">Sim</td>
+    <td>Nome do portador do cartão.</td>
+</tr>
+<tr>
+    <td><code class="prettyprint">customer.document</code></td>
+    <td style="text-align: center">Texto</td>
+    <td style="text-align: center">18</td>
+    <td style="text-align: center">Sim</td>
+    <td>Número do CPF/CNPJ do portador do cartão.</td>
+</tr>
+<tr>
+    <td><code class="prettyprint">customer.email</code></td>
+    <td style="text-align: center">Texto</td>
+    <td style="text-align: center">100</td>
+    <td style="text-align: center">Sim</td>
+    <td>Email do portador do cartão.</td>
+</tr>
+<tr>
+    <td><code class="prettyprint">customer.phoneNumber</code></td>
+    <td style="text-align: center">Texto</td>
+    <td style="text-align: center">18</td>
+    <td style="text-align: center">Sim</td>
+    <td>Número de telefone do portador do cartão.</td>
+</tr>
+<tr>
+    <td><code class="prettyprint">address.address</code></td>
+    <td style="text-align: center">Texto</td>
+    <td style="text-align: center">60</td>
+    <td style="text-align: center">Sim</td>
+    <td>Endereço do comprador.</td>
+</tr>
+<tr>
+    <td><code class="prettyprint">address.number</code></td>
+    <td style="text-align: center">Texto</td>
+    <td style="text-align: center">10</td>
+    <td style="text-align: center">Sim</td>
+    <td>Número do comprador.</td>
+</tr>
+<tr>
+    <td><code class="prettyprint">address.complement</code></td>
+    <td style="text-align: center">Texto</td>
+    <td style="text-align: center">150</td>
+    <td style="text-align: center">Não</td>
+    <td>Complemento do endereço do comprador.</td>
+</tr>
+<tr>
+    <td><code class="prettyprint">address.district</code></td>
+    <td style="text-align: center">Texto</td>
+    <td style="text-align: center">80</td>
+    <td style="text-align: center">Sim</td>
+    <td>Bairro do comprador.</td>
+</tr>
+<tr>
+    <td><code class="prettyprint">address.zipcode</code></td>
+    <td style="text-align: center">Número</td>
+    <td style="text-align: center">8</td>
+    <td style="text-align: center">Sim</td>
+    <td>CEP do comprador.</td>
+</tr>
+<tr>
+    <td><code class="prettyprint">address.city</code></td>
+    <td style="text-align: center">Texto</td>
+    <td style="text-align: center">30</td>
+    <td style="text-align: center">Sim</td>
+    <td>Cidade do comprador.</td>
+</tr>
+<tr>
+    <td><code class="prettyprint">address.state</code></td>
+    <td style="text-align: center">Texto</td>
+    <td style="text-align: center">2</td>
+    <td style="text-align: center">Sim</td>
+    <td>Sigla do estado do comprador.</td>
+</tr>
+</tbody></table>
+
+<aside>Nas autorizações de sub, o checkout trata a obrigatóriedade dos campos antes de realizar a autorização.</aside>
+
+<h3 id="resposta-autorizacao-antifraude">RESPOSTA</h3>
+
+<p>A resposta será como de uma autorização normal, apenas retornando os campos do <code class="prettyprint">customer</code> enviados.</p>
+
+<p><strong>Importante: a autorização com antifraude retorna uma autorização com status "CONFIRMADA" ou "CANCELADA" de acordo com a recomendação do antifraude.</strong></p>
+
+<p><strong>Ainda não será possível fazer apenas uma autorização.</strong></p>
+
+
+
+
 <h2 id="threeds-o">3D Secure</h2>
 
 <p>Transações autenticadas 3D Secure ou 3DS, são transações que necessitam de uma autenticação adicional para garantir maior segurança ao portador do cartão nas compras online.</p>
@@ -1372,7 +1609,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 
 </code></pre>
 
-<p>Além das propriedades da transação, é necessário enviar as seguintes propriedades na <code class="prettyprint">transação</code></p>
+<p>Além das propriedades da autorização, é necessário enviar as seguintes propriedades:</p>
 
 <table><thead>
 <tr>
@@ -1710,7 +1947,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">300</td>
 <td style="text-align: center">Sim</td>
-<td>Instruções do boleto.</td>
+<td>Instruções do boleto. <br> <strong>Para o Itaú</strong> a quantidade máxima de caracteres será: 180, e o texto será truncado em 3 partes de 60 caracteres.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">bankSlip.guarantor</code></td>
@@ -3246,7 +3483,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <p><strong>REGRAS DA TOKENIZAÇÃO:</strong></p>
 
 <ul>
-<li><strong>Disponível somente para adquirente Cielo e Rede.</strong></li>
+<li><strong>Disponível somente para adquirente Cielo.</strong></li>
 <li>Cada código de token é único por estabelecimento comercial. Se o mesmo cartão for “tokenizado” para outro estabelecimento, este terá um token diferente.</li>
 <li>Caso um estabelecimento envie duas ou mais vezes para gravar os mesmos dados de cartão, será retornado sempre o mesmo token.</li>
 <li>Não há garantia que o cartão gravado terá todas as suas transações autorizadas, pois são processos independentes e distintos.</li>
@@ -4467,7 +4704,9 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
 </tr>
 </tbody></table>
 
-          <h1 id="redes-adquirentes">Redes Adquirentes</h1>
+
+
+<h1 id="redes-adquirentes">Redes Adquirentes</h1>
 
 <table><thead>
 <tr>
@@ -4485,11 +4724,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
 </tr>
 <tr>
 <td>Rede</td>
-<td>Komerci</td>
-</tr>
-<tr>
-<td>Rede</td>
-<td>Adquirencia</td>
+<td>Rest</td>
 </tr>
 <tr>
 <td>GetNet</td>
@@ -4501,115 +4736,187 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
 </tr>
 </tbody></table>
 
-          <h1 id="bandeiras">Bandeiras</h1>
+
+
+<h1 id="bandeiras">Bandeiras</h1>
 
 <p>Bandeiras suportadas pela API</p>
 
 <table><thead>
 <tr>
-<th>Adquirente</th>
-<th>Cielo</th>
-<th>REDE</th>
-<th>GetNet</th>
-<th>Stone</th>
+    <th>Adquirente</th>
+    <th>Tipo</th>
+    <th>Cielo</th>
+    <th>REDE</th>
+    <th>GetNet</th>
+    <th>Stone</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>Visa</td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" checked disabled readonly></td>
+    <td>Visa</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
 </tr>
 <tr>
-<td>Mastercard</td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" checked disabled readonly></td>
+    <td>Mastercard</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
 </tr>
 <tr>
-<td>Diners Club</td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
+    <td>Diners Club</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
 </tr>
 <tr>
-<td>American Express</td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
+    <td>American Express</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
 </tr>
 <tr>
-<td>Elo</td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" checked disabled readonly></td>
+    <td>Elo</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
 </tr>
 <tr>
-<td>Hipercard</td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" checked disabled readonly></td>
+    <td>Hipercard</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
 </tr>
 <tr>
-<td>Hiper</td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
+    <td>Hiper</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
 </tr>
 <tr>
-<td>Aura</td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
+    <td>Aura</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
 </tr>
 <tr>
-<td>Discover</td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
+    <td>Discover</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
 </tr>
 <tr>
-<td>JCB</td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
+    <td>JCB</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
 </tr>
 <tr>
-<td>Visa Electron</td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
+    <td>Credz</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
 </tr>
 <tr>
-<td>Mastercard Maestro</td>
-<td><input type="checkbox" checked disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
-<td><input type="checkbox" disabled readonly></td>
+    <td>Amex</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+</tr>
+<tr>
+    <td>Cabal</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+</tr>
+<tr>
+    <td>Sorocred</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+</tr>
+<tr>
+    <td>Credsystem</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+</tr>
+<tr>
+    <td>Banescard</td>
+    <td>Crédito</td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+</tr>
+<tr>
+    <td>Visa Electron</td>
+    <td>Débito</td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+</tr>
+<tr>
+    <td>Mastercard Maestro</td>
+    <td>Débito</td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+</tr>
+<tr>
+    <td>Elo Caixa Econômica Federal</td>
+    <td>Débito Virtual</td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" disabled readonly></td>
 </tr>
 </tbody></table>
+</div>
 
+
+  <div class="dark-box">
+      <div class="lang-selector">
+            <a href="#" data-language-name="json">JSON</a>
+            <a href="#" data-language-name="shell">cURL</a>
+            <a href="#" data-language-name="java">JAVA</a>
       </div>
-      <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="json">JSON</a>
-                <a href="#" data-language-name="shell">cURL</a>
-                <a href="#" data-language-name="java">JAVA</a>
-          </div>
-      </div>
-    </div>
-  </body>
+  </div>
+</div>
+</body>
   <script type="text/javascript">
       function googleTranslateElementInit() {
           new google.translate.TranslateElement({pageLanguage: 'pt', includedLanguages: 'de,en,es,fr,it,ja,zh-CN',
