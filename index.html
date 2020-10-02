@@ -85,6 +85,12 @@
 .highlight .ss {
   color: #90a959;
 }
+.box-shadow-img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    background: #FFF;
+}
     </style>
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" media="print" />
@@ -125,15 +131,15 @@
 
 <p>Olá! Bem vindo a API REST do <strong>GATE2all.</strong></p>
 
-<p>Aqui você irá encontrar informações de como integrar seu sistema ao gateway de pagamentos <strong>GATE2all.</strong></p>
+<p>Aqui você irá encontrar informações para integrar seu sistema ao gateway de pagamentos <strong>GATE2all.</strong></p>
 
 <p>O <strong>GATE2all</strong> é uma plataforma de pagamentos que conecta lojas virtuais, app&rsquo;s mobile, ERP&rsquo;s ou sistema de cobranças com as principais instituições de pagamentos do Brasil.</p>
 
-<p>Ao integrar-se ao gateway de pagamentos <strong>GATE2all</strong> seu negócio poderá receber transações através das principais formas de pagamentos como cartão de crédito e débito, boleto bancário e transferência entre contas.</p>
+<p>Ao integrar-se ao gateway de pagamentos <strong>GATE2all</strong>, seu negócio poderá receber transações através das principais formas de pagamentos como cartão de crédito e débito, boleto bancário e transferência entre contas.</p>
 
 <p>A vantagem de se utilizar nossa plataforma é que você não precisará se integrar a cada adquirente ou bancos, através do <strong>GATE2all</strong> você se beneficia delas de forma unificada e sem complicações.</p>
 
-<p>O <strong>GATE2all</strong> segue as rigorosas normas do <strong>PCI DSS</strong> que são regras que visam proteger os dados do portador do cartão. Conheça mais no site <a href="https://pt.pcisecuritystandards.org">https://pt.pcisecuritystandards.org</a></p>
+<p>O <strong>GATE2all</strong> segue as rigorosas normas do <strong>PCI DSS</strong>, que são regras que visam proteger os dados do portador do cartão. Conheça mais no site <a href="https://pt.pcisecuritystandards.org">https://pt.pcisecuritystandards.org</a></p>
 
 <h2 id="sobre-este-documento">Sobre este documento</h2>
 
@@ -210,13 +216,12 @@ Nossa equipe de suporte a desenvolvedores não provê suporte para linguagens de
 
 <h2 id="adquirentes-integradas">Adquirentes integradas</h2>
 
-<p><strong>Cielo</strong> API 1.5 e 3.0</p>
-
-<p><strong>REDE</strong> Komerci e e-Rede Adquirencia</p>
-
-<p><strong>GetNet</strong></p>
-
-<p><strong>Stone</strong></p>
+<ul>
+    <li><p><strong>Cielo</strong> 1.5 (Obsoleta) e <code class="prettyprint">3.0</code></p>
+    <li><p><strong>Rede</strong> Komerci (Obsoleta), e-Rede Adquirencia (Obsoleta) e <code class="prettyprint">Rede Rest</code></p></li>
+    <li><p><strong>GetNet</strong> (Obsoleta) e <code class="prettyprint">GetNet Rest</code></p></li>
+    <!--<li><p><strong>Stone</strong> (Obsoleta)</p></li>-->
+</ul>
 
 <p><a href="#bandeiras">Bandeiras suportadas</a> </p>
 
@@ -224,7 +229,6 @@ Nossa equipe de suporte a desenvolvedores não provê suporte para linguagens de
 As transações de cartão de débito (Visa Electron e Mastercard Maestro) só são processadas se houver autenticação pelo mecanismo Verified by Visa ou Mastercard Secure Code.
 
 Não são todos os bancos emissores da Mastercard Maestro que suportam transações autenticadas no e-commerce.
-
 </aside>
 
 <h2 id="bancos-integrados">Bancos integrados</h2>
@@ -268,17 +272,17 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 
 <h3 id="d-bito">Débito</h3>
 
-<p>Bandeiras Visa Electron e Maestro através da rede adquirente Cielo, para esta modalidade é necessário a autenticação do portador através dos mecanismos “Verify By Visa” ou “Mastercard Secure Code”.</p>
+<p>Bandeiras Visa Electron e Maestro através da rede adquirente Cielo, Rede Rest e GetNet Rest, sendo que, para esta modalidade é necessário a autenticação do portador através dos mecanismos “Verify By Visa” ou “Mastercard Secure Code”.</p>
 
 <p>O cartão do portador deve estar habilitado para transações autenticadas.</p>
 
 <h3 id="transfer-ncia-on-line-entre-contas">Transferência on-line entre contas</h3>
 
-<p>Transferência online entre contas bancárias. Para utilizar este serviço o cliente deverá ter contratado junto ao banco o serviço de comercio eletrônico Bradesco ou Itaú Shopline.</p>
+<p>Transferência online entre contas bancárias. Para utilizar este serviço o cliente deverá ter contratado junto ao banco o serviço de comércio eletrônico Bradesco ou Itaú Shopline.</p>
 
 <h3 id="boletos">Boletos</h3>
 
-<p>Emissão de boleto bancário com os bancos, Bradesco e Itaú, com conciliação automática. A compensação do boleto poderá ser verificada através do relatório de transações.</p>
+<p>Emissão de boleto bancário com os bancos Bradesco, Itaú ou Santander com conciliação automática. A compensação do boleto poderá ser verificada através do relatório de transações.</p>
 
 <p>Para utilizar este serviço o cliente deverá ter contratado junto ao banco o serviço de comercio eletrônico.</p>
 
@@ -287,13 +291,13 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <p>O gateway de pagamento <strong>GATE2all</strong> permite dois tipos de integração:</p>
 
 <ol>
-<li><strong>Loja</strong>, que redireciona o comprador para um ambiente seguro do <strong>GATE2all</strong> onde os dados do cartão serão capturados. </li>
+<li><strong>Loja</strong>, que redireciona o comprador para um ambiente seguro do <strong>GATE2all</strong>, onde os dados do cartão serão capturados.</li>
 <li><strong>Integrado</strong>, onde o lojista poderá capturar os dados do cartão em seu próprio sistema.</li>
 </ol>
 
 <h2 id="ambientes">Ambientes</h2>
 
-<p>Para utilizar nosso ambiente de testes envie um e-mail informando os dados abaixo para <a href="mailto:dev@ntk.com.br">dev@ntk.com.br</a> onde realizaremos o cadastro do desenvolvedor ou empresa responsável pelo desenvolvimento. </p>
+<p>Para utilizar nosso ambiente de testes envie um e-mail informando os dados abaixo para <a href="mailto:dev@ntk.com.br">dev@ntk.com.br</a>, onde realizaremos o cadastro do desenvolvedor ou empresa responsável pelo desenvolvimento.</p>
 
 <ul>
 <li><code class="prettyprint">RAZAO SOCIAL</code></li>
@@ -738,7 +742,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Texto</td>
 <td>20</td>
 <td>Sim</td>
-<td>Nome da instituição responsável pela transferência.</td>
+<td>Nome da instituição financeira :<ul><li><strong>ITAU</strong></li></ul></td>
 </tr>
 <tr>
 <td><code class="prettyprint">bankSlip.expirationDate</code></td>
@@ -766,7 +770,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Texto</td>
 <td>20</td>
 <td>Sim</td>
-<td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li></ul></td>
+<td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li><li><strong>SANTANDER</strong></li></ul></td>
 </tr>
 </tbody></table>
 
@@ -835,33 +839,39 @@ Redirecione o comprador para a URL da resposta.
 
 <h2 id="acessando-uma-inten-o-de-venda">Acessando uma intenção de venda</h2>
 
-<p>Após o usuario acessar a URL gerada, aparecerá a seguinte tela de pagamento:</p>
+<p>Após o usuário acessar a URL retornada ao gerar a intenção de venda, será exibida a seguinte tela de pagamento:</p>
 
-<p><img src="images/intencao01.png" /></p>
+<p><img src="images/intention-choice.png" class="box-shadow-img" /></p>
 
-<p>Caso a forma de pagamento escolhida pelo usuário for cartão de crédito, aparecerá a seguinte tela:</p>
+<p>Caso a forma de pagamento escolhida pelo usuário for cartão de crédito, uma tela similar a imagem abaixo será exibida para o pagador:</p>
 
-<p><img src="images/intencao02.png" /></p>
+<p><img src="images/intention-payment.png" class="box-shadow-img" /></p>
 
-<p>Após a conclusão do preenchimento do formulário o GATE2all enviará uma <a href="#notifica-o">notificação</a> via POST contendo o <code class="prettyprint">transactionId</code> e o <code class="prettyprint">referenceId</code> para o sistema do lojista realizar a <a href="#consulta">consulta</a> da transação notificada.</p>
+<p>Exibindo algumas informações do cliente, como nome fantasia, CPF ou CNPJ, o valor e as bandeiras aceitas para pagamento.</p>
 
-<p>Caso a forma de pagamento escolhida pelo usuário for boleto, aparecerá a seguinte tela:</p>
+<p>Após a conclusão do preenchimento do formulário o GATE2all enviará uma <a href="#notifica-o">notificação</a> via POST, contendo o <code class="prettyprint">transactionId</code> e o <code class="prettyprint">referenceId</code> para o sistema do lojista realizar a <a href="#consulta">consulta</a> da transação notificada.</p>
 
-<p><img src="images/intencao03.png" /></p>
+<p>Caso a forma de pagamento escolhida pelo usuário for boleto e o provedor escolhido seja o Bradesco, uma tela similar a imagem abaixo será exibida para o pagador:</p>
 
-<p>Caso a forma de pagamento escolhida pelo usuário for transferência, aparecerá a seguinte tela:</p>
+<p><img src="images/intencao03.png" class="box-shadow-img" /></p>
 
-<p><img src="images/intencao04.png" /></p>
+<p>Caso a forma de pagamento escolhida pelo usuário for transferência e o provedor escolhido seja o Bradesco, uma tela similar a imagem abaixo será exibida para o pagador:</p>
+
+<p><img src="images/intencao04.png" class="box-shadow-img" /></p>
 
 <p>Em caso de erro ou token incorreto aparecerá a seguinte tela:</p>
 
-<p><img src="images/intencao05.png" /></p>
+<p><img src="images/intention-not-found.png" class="box-shadow-img" /></p>
 
 <h2 id="customizar-tema-dos-formul-rios">Customizar tema dos formulários</h2>
 
 <p>Utilizando nossos formulários que capturam os dados do cartão é possível customizar logo, cor de fundo, cor do formulário, cor das fontes, botão do envio e a cor do rodapé. </p>
 
 <p>Para customizar os formulários acesse o <a href="https://gate.2all.com.br">painel de controle</a> e clique no menu <a href="https://gate.2all.com.br/ntk/configuracao-cliente"><strong>&ldquo;Configurações&gt;Formulário de pagamento&rdquo;</strong></a>.</p>
+
+<aside class="notice">
+  As opções de customização estão sendo migradas para a nova tela de pagamento do gateway.
+</aside>
 
 <h1 id="gate2all-integrado">GATE2all Integrado</h1>
 
@@ -1499,18 +1509,20 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 
 
 
-<h2 id="threeds-o">3D Secure</h2>
+<h2 id="threeds-o">3D Secure 1.0</h2>
 
-<p>Transações autenticadas 3D Secure ou 3DS, são transações que necessitam de uma autenticação adicional para garantir maior segurança ao portador do cartão nas compras online.</p>
+<p><strong>Disponível apenas para a adquirente Rede Rest e GetNet Rest.</strong></p>
+
+<p>Transações autenticadas 3D Secure ou 3DS 1.0, são transações que necessitam de uma autenticação adicional para garantir maior segurança ao portador do cartão nas compras online.</p>
 
 <p>A autenticação 3DS é efetuada através da validação de dados que apenas o portador do cartão e o banco possuem, como por exemplo, senha do cartão, data de nascimento, código de segurança, token do banco.</p>
-
-<p><strong>Autorização com 3DS está disponível apenas para a adquirente Rede, sendo:</strong></p>
 
 <ul>
 <li><strong>Obrigatório para operações com cartão de Débito</strong></li>
 <li><strong>Opcional para operações com cartão de Crédito</strong></li>
 </ul>
+
+<aside class="warning">Alguns cartões de débito não suportam a autenticação 3DS 1.0. Para poder decidir por transação qual cartão de débito pode ou não entrar em um fluxo 3DS, entre em contato com o suporte.</aside>
 
 <h3 id="requisi-o">REQUISIÇÃO</h3>
 
@@ -1715,7 +1727,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </tr>
 </tbody></table>
 
-<p><strong>A transação ficará com status <code class="prettyprint">AGUARDANDO CONFIRMACAO</code> até que receba o retorno da autenticação do 3DS.</strong></p>
+<p><strong>A transação ficará com status <code class="prettyprint">TRANSACAO INICIADA</code> até que receba o retorno da autenticação do 3DS.</strong></p>
 
 
 
@@ -1961,7 +1973,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">20</td>
 <td style="text-align: center">Sim</td>
-<td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li></ul></td>
+<td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li><li><strong>SANTANDER</strong></li></ul></td>
 </tr>
 </tbody></table>
 
@@ -2078,7 +2090,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 
 <h2 id="transfer-ncia-entre-contas-banc-rias">Transferência entre contas bancárias</h2>
 
-<p>Este tipo de transação permite a transferência de valores entre contas do bancos Bradesco e Itaú, a compensação é realizada no mesmo dia. Esse meio de pagamento direciona o comprador para o Internet Bank para realizar o processo de autenticação.</p>
+<p>Este tipo de transação permite a transferência de valores entre contas do banco Itaú, a compensação é realizada no mesmo dia. Esse meio de pagamento direciona o comprador para o Internet Bank para realizar o processo de autenticação.</p>
 
 <p>No momento do pagamento, o cliente comprador informa os dados da agência, informa os dados da conta, como senha de 4 dígitos e do dispositivo de segurança (Cartão Chave de Segurança, token ou - versão Eletrônica ou no Celular.</p>
 
@@ -2280,7 +2292,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">20</td>
 <td style="text-align: center">Sim</td>
-<td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li></ul></td>
+<td>Nome da instituição financeira :<ul><li><strong>ITAU</strong></li></ul></td>
 </tr>
 </tbody></table>
 
@@ -2341,7 +2353,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td><code class="prettyprint">electronicTransfer.provider</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">20</td>
-<td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li></ul></td>
+<td>Nome da instituição financeira :<ul><li><strong>ITAU</strong></li></ul></td>
 </tr>
 <tr>
 <td><code class="prettyprint">electronicTransfer.url</code></td>
@@ -2365,7 +2377,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 
 <h1 id="captura">Captura</h1>
 
-<p>Captura é a confirmação de uma transação autorizada, após a captura que é confirmada a transação entre lojista e comprador, gerando o crédito para o lojista e o lançamento do débito na fatura do portador do cartão.</p>
+<p>Captura é a confirmação de uma transação de Crédito autorizada, após a captura que é confirmada a transação entre lojista e comprador, gerando o crédito para o lojista e o lançamento do débito na fatura do portador do cartão.</p>
 
 <h3 id="regras-da-captura">Regras da captura</h3>
 
@@ -2387,8 +2399,18 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Não</td>
 </tr>
 <tr>
+<td><code class="prettyprint">Rede Rest</code></td>
+<td>De acordo com o ramo do estabelecimento</td>
+<td>Sim</td>
+</tr>
+<tr>
 <td><code class="prettyprint">GetNet</code></td>
 <td>20 dias</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td><code class="prettyprint">GetNet Rest</code></td>
+<td>7 dias</td>
 <td>Sim</td>
 </tr>
 </tbody></table>
@@ -2599,20 +2621,24 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>* Até às 23:59 a partir da data da transação. <BR /> * Pré-autorização prazo 15 dias.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">Rede Rest (Crédito)</code></td>
+<td>90 dias</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Rede Rest (Débito)</code></td>
+<td>7 dias</td>
+</tr>
+<tr>
 <td><code class="prettyprint">GetNet</code></td>
 <td>Até 2 dias.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">Rede (Crédito)</code></td>
-<td>90 dias</td>
+<td><code class="prettyprint">GetNet Rest</code></td>
+<td>Mesmo dia ou D+1</td>
 </tr>
-<tr>
-<td><code class="prettyprint">Rede (Débito)</code></td>
-<td>7 dias</td>
-</tr>
-</tbody></table>
+</tbody></table>n
 
-<p>O cancelamento realizado para o adquirente <b>"Rede"</b>, segue as seguintes regras:</p>
+<p>O cancelamento realizado para o adquirente <b>Rede Rest</b>, segue as seguintes regras:</p>
 
 <ul>
 <li>Mesmo dia da transação - Resposta imediata (Cancelada/Negada).</li>
@@ -2709,7 +2735,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <p>Para realizar um cancelamento &ldquo;estorno&rdquo; parcial, deve-se observar as seguintes condições:</p>
 
 <ul>
-  <li><b>Disponível apenas para a adquirente Rede.</b></li>
+  <li><b>Disponível apenas para a adquirente Rede Rest.</b></li>
   <li>Mesmo dia da transação - Resposta imediata (Cancelada/Negada).</li>
   <li>Próximos dias - Solicita o cancelamento no formato D+1.</li>
 </ul>
@@ -2723,11 +2749,11 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </tr>
 </thead><tbody>
 <tr>
-  <td><code class="prettyprint">Rede (Crédito)</code></td>
+  <td><code class="prettyprint">Rede Rest (Crédito)</code></td>
   <td>Total/Parcial - 90 dias</td>
 </tr>
 <tr>
-  <td><code class="prettyprint">Rede (Débito)</code></td>
+  <td><code class="prettyprint">Rede Rest (Débito)</code></td>
   <td>Total/Parcial - 7 dias</td>
 </tr>
 </tbody></table>
@@ -3136,6 +3162,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td><code class="prettyprint">card.codAuthorization</code></td>
 <td>Texto</td>
 <td>100</td>
+<td>Não</td>
 <td>Codigo de autorização da instituição.</td>
 <td></td>
 </tr>
@@ -3143,6 +3170,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td><code class="prettyprint">card.providerReference</code></td>
 <td>Texto</td>
 <td>100</td>
+<td>Não</td>
 <td>Referência da instituição.</td>
 <td></td>
 </tr>
@@ -3200,12 +3228,13 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Texto</td>
 <td>20</td>
 <td>Sim</td>
-<td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li></ul></td>
+<td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li><li><strong>SANTANDER</strong></li></ul></td>
 </tr>
 <tr>
 <td><code class="prettyprint">bankSlip.paymentDate</code></td>
 <td>Texto</td>
 <td>20</td>
+<td>Não</td>
 <td>Data de pagamento do boleto. formato <strong>YYYY-MM-DD</strong></td>
 <td></td>
 </tr>
@@ -3213,6 +3242,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td><code class="prettyprint">bankSlip.paymentAmount</code></td>
 <td>Número</td>
 <td>16</td>
+<td>Não</td>
 <td>Valor de pagamento do boleto sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
 <td></td>
 </tr>
@@ -3220,6 +3250,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td><code class="prettyprint">bankSlip.url</code></td>
 <td>Texto</td>
 <td>300</td>
+<td>Não</td>
 <td>Endereço de acesso da transação.</td>
 <td></td>
 </tr>
@@ -3227,6 +3258,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td><code class="prettyprint">bankSlip.providerReference</code></td>
 <td>Texto</td>
 <td>100</td>
+<td>Não</td>
 <td>Referência da instituição.</td>
 <td></td>
 </tr>
@@ -3234,13 +3266,15 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td><code class="prettyprint">electronicTransfer.provider</code></td>
 <td>Texto</td>
 <td>20</td>
-<td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li></ul></td>
+<td>Não</td>
+<td>Nome da instituição financeira :<ul><li><strong>ITAU</strong></li></ul></td>
 <td></td>
 </tr>
 <tr>
 <td><code class="prettyprint">electronicTransfer.url</code></td>
 <td>Texto</td>
 <td>300</td>
+<td>Não</td>
 <td>Endereço de acesso da transação.</td>
 <td></td>
 </tr>
@@ -3248,6 +3282,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td><code class="prettyprint">electronicTransfer.providerReference</code></td>
 <td>Texto</td>
 <td>100</td>
+<td>Não</td>
 <td>Referência da instituição.</td>
 <td></td>
 </tr>
@@ -3483,7 +3518,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <p><strong>REGRAS DA TOKENIZAÇÃO:</strong></p>
 
 <ul>
-<li><strong>Disponível somente para adquirente Cielo.</strong></li>
+<li><strong>Disponível somente para adquirente Cielo e GetNet Rest.</strong></li>
 <li>Cada código de token é único por estabelecimento comercial. Se o mesmo cartão for “tokenizado” para outro estabelecimento, este terá um token diferente.</li>
 <li>Caso um estabelecimento envie duas ou mais vezes para gravar os mesmos dados de cartão, será retornado sempre o mesmo token.</li>
 <li>Não há garantia que o cartão gravado terá todas as suas transações autorizadas, pois são processos independentes e distintos.</li>
@@ -3649,7 +3684,7 @@ Caso a bandeira seja passado como paramêtro, será disponibilizado a seguinte t
 
 <p><BR></p>
 
-<p><img src="images/img-intention-01.png" /></p>
+<p><img src="images/img-intention-01.png" class="box-shadow-img" /></p>
 
 <p><BR>
 <aside class="notice">
@@ -3657,7 +3692,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 </aside></p>
 
 <p><BR>
-<img src="images/img-intention-02.png" /></p>
+<img src="images/img-intention-02.png" class="box-shadow-img" /></p>
 
 <h2 id="tokeniza-o-direta">Tokenização Direta</h2>
 
@@ -4699,9 +4734,13 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
 <td>22</td>
 </tr>
 <tr>
-<td>Stone</td>
+<td>GetNet Rest</td>
 <td>22</td>
 </tr>
+<!--<tr>
+<td>Stone</td>
+<td>22</td>
+</tr>-->
 </tbody></table>
 
 
@@ -4731,9 +4770,13 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
 <td><strong>Não enviar</strong></td>
 </tr>
 <tr>
+<td>GetNet</td>
+<td>Rest</td>
+</tr>
+<!--<tr>
 <td>Stone</td>
 <td><strong>Não enviar</strong></td>
-</tr>
+</tr>-->
 </tbody></table>
 
 
@@ -4747,9 +4790,10 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <th>Adquirente</th>
     <th>Tipo</th>
     <th>Cielo</th>
-    <th>REDE</th>
+    <th>Rede Rest</th>
     <th>GetNet</th>
-    <th>Stone</th>
+    <th>GetNet Rest</th>
+    <!--<th>Stone</th>-->
 </tr>
 </thead><tbody>
 <tr>
@@ -4759,6 +4803,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" checked disabled readonly></td>
+    <!--<td><input type="checkbox" checked disabled readonly></td>-->
 </tr>
 <tr>
     <td>Mastercard</td>
@@ -4767,6 +4812,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" checked disabled readonly></td>
+    <!--<td><input type="checkbox" checked disabled readonly></td>-->
 </tr>
 <tr>
     <td>Diners Club</td>
@@ -4775,6 +4821,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 <tr>
     <td>American Express</td>
@@ -4783,6 +4830,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 <tr>
     <td>Elo</td>
@@ -4791,6 +4839,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" checked disabled readonly></td>
+    <!--<td><input type="checkbox" checked disabled readonly></td>-->
 </tr>
 <tr>
     <td>Hipercard</td>
@@ -4799,6 +4848,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" checked disabled readonly></td>
+    <!--<td><input type="checkbox" checked disabled readonly></td>-->
 </tr>
 <tr>
     <td>Hiper</td>
@@ -4807,6 +4857,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 <tr>
     <td>Aura</td>
@@ -4815,6 +4866,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 <tr>
     <td>Discover</td>
@@ -4823,6 +4875,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 <tr>
     <td>JCB</td>
@@ -4831,6 +4884,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 <tr>
     <td>Credz</td>
@@ -4839,6 +4893,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 <tr>
     <td>Amex</td>
@@ -4846,7 +4901,8 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
-    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 <tr>
     <td>Cabal</td>
@@ -4855,6 +4911,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 <tr>
     <td>Sorocred</td>
@@ -4863,6 +4920,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 <tr>
     <td>Credsystem</td>
@@ -4871,6 +4929,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 <tr>
     <td>Banescard</td>
@@ -4879,6 +4938,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 <tr>
     <td>Visa Electron</td>
@@ -4886,7 +4946,8 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
-    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 <tr>
     <td>Mastercard Maestro</td>
@@ -4894,7 +4955,8 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
-    <td><input type="checkbox" disabled readonly></td>
+    <td><input type="checkbox" checked disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 <tr>
     <td>Elo Caixa Econômica Federal</td>
@@ -4903,6 +4965,7 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
     <td><input type="checkbox" checked disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
     <td><input type="checkbox" disabled readonly></td>
+    <!--<td><input type="checkbox" disabled readonly></td>-->
 </tr>
 </tbody></table>
 </div>
