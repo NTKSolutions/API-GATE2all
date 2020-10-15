@@ -443,7 +443,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mouse sem fio"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"postBackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-notificacao"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-redirect"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dtExpiration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-25T18:10:53"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtExpiration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-25T18:10:53"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador Teste"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="p">,</span><span class="w">
@@ -474,11 +474,15 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
             </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bradesco"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"bankSlip"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-30"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-30"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aceitar somente até a data de vencimento, após essa data juros de 1% dia"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"guarantor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador Teste"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bradesco"</span><span class="w">
         </span><span class="p">}</span><span class="w">
+        </span><span class="nt">"pix"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C6BANK"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">[ "RANDOM_KEY" ]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -492,13 +496,13 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/intention"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/intention"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
         <span class="o">+</span> <span class="s">"\"referenceId\": \"19893211234\","</span>
@@ -506,7 +510,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
         <span class="o">+</span> <span class="s">"\"description\": \"Mouse sem fio\","</span>
         <span class="o">+</span> <span class="s">"\"postBackUrl\": \"http://url-notificacao\","</span>
         <span class="o">+</span> <span class="s">"\"redirectUrl\": \"http://url-redirect\","</span>
-        <span class="o">+</span> <span class="s">"\"dtExpiration\": \"2018-01-25T18:10:53\","</span>
+        <span class="o">+</span> <span class="s">"\"dtExpiration\": \"2020-12-25T18:10:53\","</span>
         <span class="o">+</span> <span class="s">"    \"customer\": {"</span>
         <span class="o">+</span> <span class="s">"       \"name\": \"Comprador Teste\","</span>
         <span class="o">+</span> <span class="s">"       \"document\": \"12345678909\","</span>
@@ -537,10 +541,14 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
         <span class="o">+</span> <span class="s">"            \"provider\": \"Bradesco\""</span>
         <span class="o">+</span> <span class="s">"        },"</span>
         <span class="o">+</span> <span class="s">"        \"bankSlip\": {"</span>
-        <span class="o">+</span> <span class="s">"            \"expirationDate\": \"2018-03-30\","</span>
+        <span class="o">+</span> <span class="s">"            \"expirationDate\": \"2020-12-30\","</span>
         <span class="o">+</span> <span class="s">"            \"instructions\": \"Aceitar somente ate a data de vencimento, apes essa data juros de 1% dia\","</span>
         <span class="o">+</span> <span class="s">"            \"guarantor\": \"Comprador Teste\","</span>
         <span class="o">+</span> <span class="s">"            \"provider\": \"Bradesco\""</span>
+        <span class="o">+</span> <span class="s">"        }"</span>
+        <span class="o">+</span> <span class="s">"        \"pix\": {"</span>
+        <span class="o">+</span> <span class="s">"            \"provider\": \"C6BANK\","</span>
+        <span class="o">+</span> <span class="s">"            \"key\": [\"RANDOM_KEY\"] "</span>
         <span class="o">+</span> <span class="s">"        }"</span>
         <span class="o">+</span> <span class="s">"    }"</span>
         <span class="o">+</span> <span class="s">"}"</span><span class="o">;</span>
@@ -608,7 +616,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Texto</td>
 <td>20</td>
 <td>Não</td>
-<td>Data da expiração da intenção. Formato <strong>2018-01-25T18:10:53</strong></td>
+<td>Data da expiração da intenção. Formato <strong>2021-01-25T18:10:53</strong></td>
 </tr>
 <tr>
 <td><code class="prettyprint">customer.name</code></td>
@@ -671,7 +679,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Número</td>
 <td>8</td>
 <td>Sim</td>
-<td>CEP do comprador.</td>
+<td>CEP do comprador sem formatação. <br>Exemplo: <b>04549002</b>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">address.city</code></td>
@@ -797,7 +805,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
     <td>Texto</td>
     <td>20</td>
     <td>Não</td>
-    <td><b class="info-sandbox">Sandbox</b><br>Campos para chave do Pix: <ul><li><strong>RANDOM_KEY</strong> (Suportado)</li><li><strong>EMAIL</strong></li><li><strong>DOCUMENT</strong></li><li><strong>PHONE</strong></li></ul></td>
+    <td><b class="info-sandbox">Sandbox</b><br>Campos utilizados para o Pix: <ul><li><strong>RANDOM_KEY</strong> (Suportado)</li><li><strong>EMAIL</strong></li><li><strong>DOCUMENT</strong></li><li><strong>PHONE</strong></li></ul></td>
 </tr>
 </tbody></table>
 
@@ -808,7 +816,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <p>Status : 201</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b9bb32a8-401e-41a0-a9ee-af9e8ab0de92"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.2all.com.br.com.br/v1/payment/b9bb32a8-401e-41a0-a9ee-af9e8ab0de92"</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gate2all.com.br/v1/payment/b9bb32a8-401e-41a0-a9ee-af9e8ab0de92"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -944,7 +952,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
           </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
               </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4539708473330561"</span><span class="p">,</span><span class="w">
               </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026"</span><span class="p">,</span><span class="w">
               </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"234"</span><span class="p">,</span><span class="w">
               </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
               </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="w">
@@ -960,13 +968,13 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/transactions"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
         <span class="o">+</span> <span class="s">"\"referenceId\": \"123456\","</span>
@@ -990,7 +998,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
         <span class="o">+</span> <span class="s">"        \"cardInfo\": {"</span>
         <span class="o">+</span> <span class="s">"           \"number\": \"4539708473330561\","</span>
         <span class="o">+</span> <span class="s">"           \"expirationMonth\": \"04\","</span>
-        <span class="o">+</span> <span class="s">"           \"expirationYear\": \"2019\","</span>
+        <span class="o">+</span> <span class="s">"           \"expirationYear\": \"2026\","</span>
         <span class="o">+</span> <span class="s">"           \"cvv\": \"234\","</span>
         <span class="o">+</span> <span class="s">"           \"brand\": \"VISA\","</span>
         <span class="o">+</span> <span class="s">"           \"holderName\": \"COMPRADOR TESTE\""</span>
@@ -1196,7 +1204,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TV LG 42"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-05T12:04:20"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-05T12:04:20"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -1214,10 +1222,11 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
       </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1006993069000834928A"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao autorizada com sucesso"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"nsu"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"453970******0561"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="w">
@@ -1300,6 +1309,12 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Indicador de autenticação da transação.<a href="#status-eci">Códigos ECI</a></td>
 </tr>
 <tr>
+<td><code class="prettyprint">card.nsu</code></td>
+<td>Texto</td>
+<td>-</td>
+<td>Número sequêncial único da adquirente. Disponível para: <ul><li>Cielo 3.0</li><li>Rede Rest</li></ul></td>
+</tr>
+<tr>
 <td><code class="prettyprint">status</code></td>
 <td>Número</td>
 <td>2</td>
@@ -1309,7 +1324,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 
 
 
-
+<!--
 <h2 id="autorizacao-antifraude">Autorização com Antifraude</h2>
 
 <p><string>Disponível apenas para clientes de sub</string>, é obrigatória a checagem da transação em um antifraude. Atualmente com suporte apenas da konduto.</p>
@@ -1352,7 +1367,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
             </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4539708473330561"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"234"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="w">
@@ -1368,13 +1383,13 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/transactions"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
     <span class="o">+</span> <span class="s">"\"referenceId\": \"123456\","</span>
@@ -1410,7 +1425,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     <span class="o">+</span> <span class="s">"        \"cardInfo\": {"</span>
     <span class="o">+</span> <span class="s">"           \"number\": \"4539708473330561\","</span>
     <span class="o">+</span> <span class="s">"           \"expirationMonth\": \"04\","</span>
-    <span class="o">+</span> <span class="s">"           \"expirationYear\": \"2019\","</span>
+    <span class="o">+</span> <span class="s">"           \"expirationYear\": \"2026\","</span>
     <span class="o">+</span> <span class="s">"           \"cvv\": \"234\","</span>
     <span class="o">+</span> <span class="s">"           \"brand\": \"VISA\","</span>
     <span class="o">+</span> <span class="s">"           \"holderName\": \"COMPRADOR TESTE\""</span>
@@ -1505,7 +1520,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     <td style="text-align: center">Número</td>
     <td style="text-align: center">8</td>
     <td style="text-align: center">Sim</td>
-    <td>CEP do comprador.</td>
+    <td>CEP do comprador sem formatação. <br>Exemplo: <b>04549002</b>.</td>
 </tr>
 <tr>
     <td><code class="prettyprint">address.city</code></td>
@@ -1532,7 +1547,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <p><strong>Importante: a autorização com antifraude retorna uma autorização com status "CONFIRMADA" ou "CANCELADA" de acordo com a recomendação do antifraude.</strong></p>
 
 <p><strong>Ainda não será possível fazer apenas uma autorização.</strong></p>
-
+-->
 
 
 
@@ -1578,7 +1593,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
           </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
               </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4539708473330561"</span><span class="p">,</span><span class="w">
               </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026"</span><span class="p">,</span><span class="w">
               </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"234"</span><span class="p">,</span><span class="w">
               </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
               </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="w">
@@ -1594,13 +1609,13 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/transactions"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
         <span class="o">+</span> <span class="s">"\"referenceId\": \"123456\","</span>
@@ -1625,7 +1640,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
         <span class="o">+</span> <span class="s">"        \"cardInfo\": {"</span>
         <span class="o">+</span> <span class="s">"           \"number\": \"4539708473330561\","</span>
         <span class="o">+</span> <span class="s">"           \"expirationMonth\": \"04\","</span>
-        <span class="o">+</span> <span class="s">"           \"expirationYear\": \"2019\","</span>
+        <span class="o">+</span> <span class="s">"           \"expirationYear\": \"2026\","</span>
         <span class="o">+</span> <span class="s">"           \"cvv\": \"234\","</span>
         <span class="o">+</span> <span class="s">"           \"brand\": \"VISA\","</span>
         <span class="o">+</span> <span class="s">"           \"holderName\": \"COMPRADOR TESTE\""</span>
@@ -1687,7 +1702,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
   </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 ..."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-05T12:04:20"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-05T12:04:20"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -1708,7 +1723,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
       </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"453970******0561"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="w">
@@ -1797,7 +1812,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
    </span><span class="p">},</span><span class="w">
    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
        </span><span class="nt">"bankSlip"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"expirationDate"</span><span class="w"> </span><span class="p">:</span><span class="s2">"2018-03-10"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"expirationDate"</span><span class="w"> </span><span class="p">:</span><span class="s2">"2020-12-10"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"instructions"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Aceitar somente até a data de vencimento, após essa data juros de 1% dia"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"guarantor"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"provider"</span><span class="p">:</span><span class="s2">"Itau"</span><span class="w">
@@ -1815,13 +1830,13 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/transactions"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
         <span class="o">+</span> <span class="s">"\"referenceId\": \"123456789\","</span>
@@ -1844,7 +1859,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
         <span class="o">+</span> <span class="s">"    },"</span>
         <span class="o">+</span> <span class="s">"    \"payment\": {"</span>
         <span class="o">+</span> <span class="s">"        \"bankSlip\" : {"</span>
-        <span class="o">+</span> <span class="s">"            \"expirationDate\" :\"2018-03-10\","</span>
+        <span class="o">+</span> <span class="s">"            \"expirationDate\" :\"2020-12-10\","</span>
         <span class="o">+</span> <span class="s">"            \"instructions\" : \"Aceitar somente ate a data de vencimento, apos essa data juros de 1% dia\","</span>
         <span class="o">+</span> <span class="s">"            \"guarantor\" : \"Joao da Silva\","</span>
         <span class="o">+</span> <span class="s">"            \"provider\":\"Itau\""</span>
@@ -1958,7 +1973,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td style="text-align: center">Número</td>
 <td style="text-align: center">8</td>
 <td style="text-align: center">Sim</td>
-<td>CEP do comprador.</td>
+<td>CEP do comprador sem formatação. <br>Exemplo: <b>04549002</b>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">address.city</code></td>
@@ -2010,7 +2025,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
   </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-08T10:46:31-0300"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-08T10:46:31-0300"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="p">,</span><span class="w">
@@ -2030,14 +2045,14 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
       </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20575112"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transação iniciada"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"emissionDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-08"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-10"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"emissionDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-08"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-10"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aceitar somente até a data de vencimento, após essa data juros de 1% dia"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"guarantor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ITAU"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"paymentDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-08"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"paymentDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-08"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gate2all.com.br/v1/payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
@@ -2159,13 +2174,13 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/transactions"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
         <span class="o">+</span> <span class="s">"\"referenceId\": \"123456789\","</span>
@@ -2298,7 +2313,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td style="text-align: center">Número</td>
 <td style="text-align: center">8</td>
 <td style="text-align: center">Sim</td>
-<td>CEP do comprador.</td>
+<td>CEP do comprador sem formatação. <br>Exemplo: <b>04549002</b>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">address.city</code></td>
@@ -2329,7 +2344,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-05T16:16:14-0200"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-05T16:16:14-0200"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="p">,</span><span class="w">
@@ -2348,7 +2363,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
         </span><span class="nt">"electronicTransfer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20518839"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Itau"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gate2all.com.br/v1/payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
@@ -2405,7 +2420,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <!-- PIX -->
 <h2 id="pix">Pix</h2>
 
-<p><b class="info-sandbox">Disponível em Sandbox</b></p>
+<p><b class="info-sandbox">Disponível em Sandbox, esta documentações poderá sofrer alterações.</b></p>
 
 <p>Pix é um meio de pagamento eletrônico e faz parte do Sistema de Pagamentos Instantâneos (SPI).</p>
 
@@ -2416,9 +2431,9 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <ol>
   <li>Realizar a chamada para efetuar a transação (Detalhes na sequência);</li>
   <li>O integrador receberá uma notificação em uma url informada em <b>postBackUrl</b> assim que o <b>qrcode</b> estiver gerado;</li>
-  <li>O integrador precisa <a href="#consulta">consultar a api</a> para obter os dados do <b>qrcode</b> e imprimir para o cliente (Seguindo orientações do Bacen);</li>
+  <li>O integrador precisa <a href="#consulta">consultar a API</a> para obter os dados do <b>qrcode</b> e imprimir para o cliente (Seguindo orientações do Bacen);</li>
   <li>O integrador receberá uma notificação em uma url informada em <b>postBackUrl</b> assim que tiver qualquer mudança no status da transação;</li>
-  <li>O integrador precisa <a href="#consulta">consultar a api</a> para obter as informações do pagamento com Pix.</li>
+  <li>O integrador precisa <a href="#consulta">consultar a API</a> para obter as informações do pagamento com Pix.</li>
 </ol>
 
 <p>Seguem detalhes para realizar a chamada para uma transação com Pix:</p>
@@ -2449,13 +2464,13 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/transactions"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
         <span class="o">+</span> <span class="s">"\"referenceId\": \"123456789\","</span>
@@ -2528,8 +2543,8 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     <td><code class="prettyprint">postBackUrl</code></td>
     <td>Texto</td>
     <td>—</td>
-    <td>Sim</td>
-    <td>URL onde o GATE2all notificará eventuais status da tokenização para o lojista.</td>
+    <td>Não</td>
+    <td>URL onde o gateway notificará eventuais alterações de status para o lojista. Caso não informado, precisará ficar consultando a API.</td>
 </tr>
 <tr>
     <td><code class="prettyprint">pix.provider</code></td>
@@ -2554,7 +2569,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
   </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-08T10:46:31-0300"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-08T10:46:31-0300"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"pix"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C6BANK"</span><span class="p">,</span><span class="w">
@@ -2563,7 +2578,10 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
+</span></code>
+
+<a href="#consulta">Para exemplos de retorno quando o Pix foi Gerado ou Pago clique aqui.</a>
+</pre>
 <pre class="highlight shell"><code></code></pre>
 
 <table>
@@ -2587,6 +2605,12 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
   <td>DataHora</td>
   <td>19</td>
   <td>Data e hora da transação.</td>
+</tr>
+<tr>
+    <td><code class="prettyprint">status</code></td>
+    <td>Número</td>
+    <td>2</td>
+    <td>Status da transação retornado pelo gateway. Para o Pix considerar: <ul><li>0 - Solicitação do QRCode</li><li>1 - QRCode gerado</li></ul></td>
 </tr>
 <tr>
     <td><code class="prettyprint">pix.provider</code></td>
@@ -2622,7 +2646,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Sim</td>
 </tr>
 <tr>
-<td><code class="prettyprint">Rede(Komerci)</code></td>
+<td><code class="prettyprint">Rede(Komerci) (Descontinuado)</code></td>
 <td>2 minutos</td>
 <td>Não</td>
 </tr>
@@ -2657,12 +2681,12 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions/{{transactionId}}/capture"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/transactions/{{transactionId}}/capture"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"PUT"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
 <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
@@ -2700,7 +2724,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-07T17:09:07"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-07T17:09:07"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -2745,12 +2769,12 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions/{{transactionId}}/capture?amount=200"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/transactions/{{transactionId}}/capture?amount=200"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"PUT"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
 <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
@@ -2795,7 +2819,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-07T17:09:07"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-07T17:09:07"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -2845,7 +2869,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>300 dias</td>
 </tr>
 <tr>
-<td><code class="prettyprint">Rede(Komerci)</code></td>
+<td><code class="prettyprint">Rede(Komerci) (Descontinuado)</code></td>
 <td>* Até às 23:59 a partir da data da transação. <BR /> * Pré-autorização prazo 15 dias.</td>
 </tr>
 <tr>
@@ -2884,12 +2908,12 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions/957221f5-d08b-4445-9896-52152f31b846/void"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/transactions/957221f5-d08b-4445-9896-52152f31b846/void"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"PUT"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
 <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
@@ -2927,7 +2951,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-07T17:09:07"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-07T17:09:07"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -2967,7 +2991,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
 </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200"</span><span class="p">,</span><span class="w">
 </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-</span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-07T17:09:07"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-07T17:09:07"</span><span class="p">,</span><span class="w">
 </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"pix"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"provider"</span> <span class="p">:</span> <span class="w"></span><span class="mi">"C6BANK"</span><span class="p">,</span><span class="w">
@@ -3021,12 +3045,12 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions/957221f5-d08b-4445-9896-52152f31b846/void?amount=100"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/transactions/957221f5-d08b-4445-9896-52152f31b846/void?amount=100"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"PUT"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
 <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
@@ -3071,7 +3095,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
 </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200"</span><span class="p">,</span><span class="w">
 </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-</span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-07T17:09:07"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-07T17:09:07"</span><span class="p">,</span><span class="w">
 </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -3116,12 +3140,12 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions/d31dcd70-6666-40af-85ba-ed1ff23bc293"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/transactions/d31dcd70-6666-40af-85ba-ed1ff23bc293"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
 <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
@@ -3159,7 +3183,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
   </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-07T17:09:07"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-07T17:09:07"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -3196,7 +3220,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
   </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-08T10:46:31-0300"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-08T10:46:31-0300"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="p">,</span><span class="w">
@@ -3214,14 +3238,14 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"bankSlip"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20575112"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"emissionDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-08"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-10"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"emissionDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-08"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-10"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aceitar somente até a data de vencimento, após essa data juros de 1% dia"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"guarantor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ITAU"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"paymentDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-08"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"paymentDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-08"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gate2all.com.br/v1/payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
@@ -3236,7 +3260,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-05T16:16:14-0200"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-05T16:16:14-0200"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="p">,</span><span class="w">
@@ -3255,7 +3279,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
         </span><span class="nt">"electronicTransfer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20518839"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Itau"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gate2all.com.br/v1/payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
@@ -3271,7 +3295,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
 </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
 </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-05T16:16:14-0200"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-05T16:16:14-0200"</span><span class="p">,</span><span class="w">
 </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"pix"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C6BANK"</span><span class="p">,</span><span class="w">
@@ -3292,7 +3316,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
 </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
 </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-05T16:16:14-0200"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-05T16:16:14-0200"</span><span class="p">,</span><span class="w">
 </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"pix"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C6BANK"</span><span class="p">,</span><span class="w">
@@ -3395,7 +3419,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Número</td>
 <td>8</td>
 <td>Sim</td>
-<td>CEP do comprador.</td>
+<td>CEP do comprador sem formatação. <br>Exemplo: <b>04549002</b>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">address.city</code></td>
@@ -3607,7 +3631,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     <td>Texto</td>
     <td>-</td>
     <td>Não</td>
-    <td><b class="info-sandbox">Sandbox</b><br>Conteúdo para gerar o qrCode a ser pago.<br>Retornado quando o status da transação é <b>1</b>.</td>
+    <td><b class="info-sandbox">Sandbox</b><br>Conteúdo para gerar o QRCode a ser pago.<br>Retornado quando o status da transação é <b>1</b>.</td>
 </tr>
 <tr>
     <td><code class="prettyprint">pix.paymentAmount</code></td>
@@ -3659,12 +3683,12 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions?referenceId=1493321061725"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/transactions?referenceId=1493321061725"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
 <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
@@ -3702,7 +3726,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b9a37a7b-5ffe-4993-82ab-a26b6f332afe"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-15T11:17:40"</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-15T11:17:40"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -3760,12 +3784,12 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions?referenceId=1493321061725&amp;limit=2"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/transactions?referenceId=1493321061725&amp;limit=2"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
 <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
@@ -3810,13 +3834,13 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"894aa0ad-517a-435c-b95d-8f60f1a2b9f5"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-16T07:37:23"</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-16T07:37:23"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5dbc102d-2b4b-4755-9f14-1b4c3d8a6716"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-16T07:37:00"</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-16T07:37:00"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -3918,13 +3942,13 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/tokenization/intention"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/tokenization/intention"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
         <span class="o">+</span> <span class="s">"\"postBackUrl\": \"http://url-notificacao\","</span>
@@ -4065,7 +4089,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
     </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4024007148992927"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -4081,13 +4105,13 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/tokenization"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/tokenization"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
     <span class="o">+</span> <span class="s">"\"referenceId\": \"123456789\","</span>
@@ -4095,7 +4119,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
     <span class="o">+</span> <span class="s">"    \"cardInfo\": {"</span>
     <span class="o">+</span> <span class="s">"        \"number\": \"4556326359707410\","</span>
     <span class="o">+</span> <span class="s">"        \"expirationMonth\": \"04\","</span>
-    <span class="o">+</span> <span class="s">"        \"expirationYear\": \"2019\","</span>
+    <span class="o">+</span> <span class="s">"        \"expirationYear\": \"2026\","</span>
     <span class="o">+</span> <span class="s">"        \"brand\": \"VISA\","</span>
     <span class="o">+</span> <span class="s">"        \"holderName\": \"Comprador\""</span>
     <span class="o">+</span> <span class="s">"      }"</span>
@@ -4181,7 +4205,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
   </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"402400******2927"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"be4cbeb1-abb2-4913-8165-f86962143fa021"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="w">
@@ -4239,12 +4263,12 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/tokenization/be4cbeb1-abb2-4913-8165-f86962143fa021"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/tokenization/be4cbeb1-abb2-4913-8165-f86962143fa021"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
 <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
@@ -4286,7 +4310,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
   </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"402400******2927"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"be4cbeb1-abb2-4913-8165-f86962143fa021"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="w">
@@ -4383,12 +4407,12 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/tokenization?referenceId=1496173577825&amp;limit=2"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/tokenization?referenceId=1496173577825&amp;limit=2"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
 <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
@@ -4438,7 +4462,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
     </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"402400******2927"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"be4cbeb1-abb2-4913-8165-f86962143fa021"</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -4551,13 +4575,13 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 <span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.2all.com.br/v1/transactions"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.gate2all.com.br/v1/transactions"</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
 <span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationApi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationKey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
 
 <span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
       <span class="o">+</span> <span class="s">"\"referenceId\": \"123456789\","</span>
@@ -4710,7 +4734,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mouse sem fio"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-09T18:01:17"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-09T18:01:17"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -4731,7 +4755,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
       </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"402400******2927"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4b6a2aa5-de91-4d52-a4d1-f265f208e5a321"</span><span class="w">
@@ -4870,7 +4894,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 }'</span>
 </code></pre>
 
-<p>A notificação espera como resposta um 200 (Status HTTP), caso a resposta não seja um 200, o sistema tentará 3 vezes mais. 
+<p>A notificação espera como resposta um 200 (Status HTTP), caso a resposta não seja um 200, o sistema tentará 5 vezes mais.
 Lembrando que é possível efetuar a consulta em qualquer operação, com a consulta pelo transactionId ou pelo referenceId <a href="#consulta">consulta</a> </p>
 
 <h1 id="status">STATUS</h1>
